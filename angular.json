@@ -115,6 +115,12 @@
           }
         }
       }
-    }},
-  "defaultProject": "cook-book"
+    }
+  },
+  "defaultProject": "cook-book",
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "scss"
+    }
+  }
 }
