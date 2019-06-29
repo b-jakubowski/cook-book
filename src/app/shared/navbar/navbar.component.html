@@ -1,0 +1,26 @@
+<nav class="navbar has-shadow" role="navigation" aria-label="main navigation">
+	<div class="navbar-brand">
+		<a class="navbar-item logo" href="">
+			<span class="icon"><fa-icon [icon]="'pepper-hot'"></fa-icon></span>
+			CookBook
+		</a>
+		<a role="button" 
+			class="navbar-burger burger"
+			aria-label="menu"
+			aria-expanded="false"
+			(click)="isDropdownOpened = !isDropdownOpened"
+			[ngClass]="{'is-active': isDropdownOpened}">
+			<span aria-hidden="true"></span>
+			<span aria-hidden="true"></span>
+			<span aria-hidden="true"></span>
+		</a>
+	</div>
+
+	<div class="navbar-menu navbar-end">
+		<app-navbar-desktop-menu></app-navbar-desktop-menu>
+	</div>
+
+	<div class="navbar-menu is-hidden-desktop" [ngClass]="{'is-active': isDropdownOpened}">
+		<app-navbar-mobile-menu></app-navbar-mobile-menu>
+	</div>
+</nav>
