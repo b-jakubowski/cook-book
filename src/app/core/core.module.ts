@@ -10,13 +10,18 @@ import {
 	faPlusCircle,
 	faList,
 	faShoppingCart,
-	faPepperHot
+	faPepperHot,
+	faClock,
+	faCarrot,
+	faWeightHanging
 } from '@fortawesome/free-solid-svg-icons';
+import { HttpClientModule } from '@angular/common/http';
 
 
 const modules = [
 	CommonModule,
 	FontAwesomeModule,
+	HttpClientModule
 ];
 
 @NgModule({
@@ -35,7 +40,10 @@ export class CoreModule {
 			faPlusCircle,
 			faList,
 			faShoppingCart,
-			faPepperHot
+			faPepperHot,
+			faClock,
+			faCarrot,
+			faWeightHanging
 		);
 	}
 }

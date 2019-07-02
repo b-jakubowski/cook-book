@@ -1,6 +1,31 @@
-<div class="section">
-  <div class="card">
-    <div class="card-header"><p class="card-header-title">Header</p></div>
-    <div class="card-content"><div class="content">Content</div></div>
-  </div>
+<div class="box">
+  <article class="media">
+    <div class="media-left is-hidden-touch">
+      <figure class="image is-120x120">
+        <img [src]="recipe.imagePath" alt="Image">
+      </figure>
+    </div>
+    <div class="media-content">
+      <div class="content">
+        <div class="title is-4 is-size-5-mobile">{{recipe.name}}</div>
+        <div class="recipe-item-details has-text-grey-light has-text-weight-medium">
+          <div>
+            <fa-icon  [icon]="'clock'"></fa-icon>
+            <span> {{recipe.time}}</span>
+          </div>
+          <div>
+            <fa-icon [icon]="'carrot'"></fa-icon>
+            <span> {{recipe.ingredients.length}} ingredients</span>
+          </div>
+          <div>
+            <fa-icon [icon]="'weight-hanging'"></fa-icon>
+            <span> {{recipe.kcal}} kcal</span>
+          </div>
+        </div>
+        <ng-container *ngFor="let category of recipe.category">
+          <span class="tag is-primary is-medium">{{category}}</span>
+        </ng-container>
+      </div>
+    </div>
+  </article>
 </div>
