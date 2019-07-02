@@ -1,0 +1,21 @@
+:host {
+  .box {
+    margin-bottom: 1em;
+  }
+  .tag {
+    margin-right: 1em;
+  }
+  img {
+    height: 150px;
+    width: 150px;
+    object-fit: cover;
+  }
+  .content {
+    .title {
+      margin-bottom: 0.7em;
+    }
+  }
+  .recipe-item-details {
+    margin-bottom: 0.4em;
+  }
+}
