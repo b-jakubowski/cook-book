@@ -11,6 +11,7 @@ import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { AppRoutingModule } from './app-routing.module';
 import { EditRecipeComponent } from './recipes/edit-recipe/edit-recipe.component';
 import { ShoppingListItemComponent } from './shopping-list/shopping-list-item/shopping-list-item.component';
+import { AddShoppingListItemComponent } from './shopping-list/add-shopping-list-item/add-shopping-list-item.component';
 
 @NgModule({
 	declarations: [
@@ -21,6 +22,7 @@ import { ShoppingListItemComponent } from './shopping-list/shopping-list-item/sh
 		EditRecipeComponent,
 		ShoppingListComponent,
 		ShoppingListItemComponent,
+		AddShoppingListItemComponent,
 	],
 	imports: [
 		BrowserModule,
