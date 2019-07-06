@@ -1,0 +1,18 @@
+:host {
+  .columns{
+    margin-bottom: 1em;
+  }
+  .column {
+    margin-bottom: 0;
+  }
+  @media (max-width: 768px) {
+    .add-button {
+      display: flex;
+      justify-content: center;
+      .button {
+        height: 2.5em;
+        width: 5em;
+      }
+    }
+  }
+}
