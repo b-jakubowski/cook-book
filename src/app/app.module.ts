@@ -7,6 +7,9 @@ import { SharedModule } from './shared/shared.module';
 import { RecipesComponent } from './recipes/recipes.component';
 import { RecipeListComponent } from './recipes/recipe-list/recipe-list.component';
 import { RecipeItemComponent } from './recipes/recipe-item/recipe-item.component';
+import { ShoppingListComponent } from './shopping-list/shopping-list.component';
+import { AppRoutingModule } from './app-routing.module';
+import { EditRecipeComponent } from './recipes/edit-recipe/edit-recipe.component';
 
 @NgModule({
 	declarations: [
@@ -14,11 +17,14 @@ import { RecipeItemComponent } from './recipes/recipe-item/recipe-item.component
 		RecipesComponent,
 		RecipeListComponent,
 		RecipeItemComponent,
+		ShoppingListComponent,
+		EditRecipeComponent,
 	],
 	imports: [
 		BrowserModule,
 		CoreModule,
-		SharedModule
+		SharedModule,
+		AppRoutingModule
 	],
 	providers: [],
 	bootstrap: [AppComponent]
