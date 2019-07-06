@@ -1,0 +1,5 @@
+<div class="panel">
+  <ng-container *ngFor="let shoppingListItem of (shoppingList | async)">
+    <app-shopping-list-item [shoppingListItem]="shoppingListItem"></app-shopping-list-item>
+  </ng-container>
+</div>

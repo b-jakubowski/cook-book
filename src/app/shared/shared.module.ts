@@ -4,6 +4,7 @@ import { CoreModule } from '../core/core.module';
 import { NavbarMobileMenuComponent } from './navbar/navbar-mobile-menu/navbar-mobile-menu.component';
 import { NavbarDesktopMenuComponent } from './navbar/navbar-desktop-menu/navbar-desktop-menu.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { RouterModule } from '@angular/router';
 
 const components = [
 	NavbarComponent,
@@ -16,6 +17,7 @@ const components = [
 	declarations: components,
 	imports: [
 		CoreModule,
+		RouterModule
 	],
 	providers: [],
 	exports: components
