@@ -1,0 +1,27 @@
+[
+  {
+    "id": "1",
+    "name": "Beef",
+    "amount": "500g"
+  },
+  {
+    "id": "2",
+    "name": "Tomatoes",
+    "amount": "4 pieces"
+  },
+  {
+    "id": "3",
+    "name": "Mayonaise",
+    "amount": "1 jar"
+  },
+  {
+    "id": "4",
+    "name": "Buns",
+    "amount": "6 pieces"
+  },
+  {
+    "id": "5",
+    "name": "Pickles",
+    "amount": "3 pieces"
+  }
+]
