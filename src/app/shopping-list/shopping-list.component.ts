@@ -9,7 +9,8 @@ import {ShoppingListService} from './shopping-list.service';
 	styleUrls: ['./shopping-list.component.scss']
 })
 export class ShoppingListComponent {
-	shoppingList: Observable<ShoppingListItem[]> = this.shoppingListService.fetchShoppingListFromMock();
+	// shoppingList: Observable<ShoppingListItem[]> = this.shoppingListService.fetchShoppingListFromMock();
+	shoppingList: Observable<ShoppingListItem[]> = this.shoppingListService.getShoppingList();
 
 	constructor(private shoppingListService: ShoppingListService) {}
 }
