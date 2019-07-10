@@ -13,6 +13,9 @@ import { EditRecipeComponent } from './recipes/edit-recipe/edit-recipe.component
 import { ShoppingListItemComponent } from './shopping-list/shopping-list-item/shopping-list-item.component';
 import { AddShoppingListItemComponent } from './shopping-list/add-shopping-list-item/add-shopping-list-item.component';
 import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.component';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { environment } from '../environments/environment';
 
 @NgModule({
 	declarations: [
@@ -30,7 +33,9 @@ import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.com
 		BrowserModule,
 		CoreModule,
 		SharedModule,
-		AppRoutingModule
+		AppRoutingModule,
+		AngularFireModule.initializeApp(environment.firebase, 'cookbook'),
+		AngularFirestoreModule
 	],
 	providers: [],
 	bootstrap: [AppComponent]
