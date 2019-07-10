@@ -12,6 +12,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { EditRecipeComponent } from './recipes/edit-recipe/edit-recipe.component';
 import { ShoppingListItemComponent } from './shopping-list/shopping-list-item/shopping-list-item.component';
 import { AddShoppingListItemComponent } from './shopping-list/add-shopping-list-item/add-shopping-list-item.component';
+import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.component';
 
 @NgModule({
 	declarations: [
@@ -23,6 +24,7 @@ import { AddShoppingListItemComponent } from './shopping-list/add-shopping-list-
 		ShoppingListComponent,
 		ShoppingListItemComponent,
 		AddShoppingListItemComponent,
+		RecipeDetailComponent,
 	],
 	imports: [
 		BrowserModule,
