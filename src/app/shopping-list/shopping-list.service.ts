@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { ShoppingListItem } from './shopping-list-item.interface';
+import {map} from 'rxjs/operators';
 
 @Injectable({
 	providedIn: 'root'
@@ -13,9 +14,8 @@ export class ShoppingListService {
 
 	constructor(
 		private http: HttpClient,
-		public firestore: AngularFirestore
-	) {
-		this.shoppingListItems = this.firestore.collection<ShoppingListItem>('shopping-list').valueChanges();
+		private firestore: AngularFirestore) {
+		this.shoppingListItemCollection = this.firestore.collection<ShoppingListItem>('shopping-list');
 	}
 
 	fetchShoppingListFromMock(): Observable<{}> {
@@ -23,6 +23,14 @@ export class ShoppingListService {
 	}
 
 	getShoppingList() {
+		this.shoppingListItems = this.shoppingListItemCollection.snapshotChanges().pipe(
+			map(actions => actions.map(a => {
+				const data = a.payload.doc.data();
+				const id = a.payload.doc.id;
+				return { id, ...data };
+			}))
+		);
+
 		return this.shoppingListItems;
 	}
 }
