@@ -1,15 +1,23 @@
-import { Component } from '@angular/core';
-import {ShoppingListItem} from './shopping-list-item.interface';
+import { Component, OnInit } from '@angular/core';
 import {Observable} from 'rxjs';
 import {ShoppingListService} from './shopping-list.service';
+import { Store } from '@ngrx/store';
+import { Ingredient } from '../recipes/recipe-item/ingredient.interface';
+import * as ShoppingListActions from './store/shopping-list.actions';
 
 @Component({
 	selector: 'app-shopping-list',
 	templateUrl: './shopping-list.component.html',
 	styleUrls: ['./shopping-list.component.scss']
 })
-export class ShoppingListComponent {
-	shoppingList: Observable<ShoppingListItem[]> = this.shoppingListService.fetchShoppingListFromMock();
 
-	constructor(private shoppingListService: ShoppingListService) {}
+export class ShoppingListComponent implements OnInit {
+	shoppingList: Observable<Ingredient[]> = this.store.select(state => state.shoppingList);
+
+	constructor(
+		private store: Store<{ shoppingList: Ingredient[] }>) {}
+
+	ngOnInit() {
+		this.store.dispatch({ type: ShoppingListActions.FETCH_INGREDIENTS });
+	}
 }

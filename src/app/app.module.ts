@@ -13,6 +13,15 @@ import { EditRecipeComponent } from './recipes/edit-recipe/edit-recipe.component
 import { ShoppingListItemComponent } from './shopping-list/shopping-list-item/shopping-list-item.component';
 import { AddShoppingListItemComponent } from './shopping-list/add-shopping-list-item/add-shopping-list-item.component';
 import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.component';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { environment } from '../environments/environment';
+import { EffectsModule } from '@ngrx/effects';
+import { ShoppingListEffects } from './shopping-list/store/shopping-list.effects';
+import { StoreModule } from '@ngrx/store';
+import { shoppingListReducer } from './shopping-list/store/shopping-list.reducer';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 @NgModule({
 	declarations: [
@@ -30,7 +39,12 @@ import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.com
 		BrowserModule,
 		CoreModule,
 		SharedModule,
-		AppRoutingModule
+		AppRoutingModule,
+		AngularFireModule.initializeApp(environment.firebase, 'cookbook'),
+		AngularFirestoreModule,
+		EffectsModule.forRoot([ShoppingListEffects]),
+		StoreModule.forRoot({ shoppingList: shoppingListReducer }),
+		StoreDevtoolsModule.instrument({ logOnly: environment.production })
 	],
 	providers: [],
 	bootstrap: [AppComponent]
