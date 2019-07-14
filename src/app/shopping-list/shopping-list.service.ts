@@ -2,20 +2,20 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
-import { ShoppingListItem } from './shopping-list-item.interface';
 import {map} from 'rxjs/operators';
+import { Ingredient } from '../recipes/recipe-item/ingredient.interface';
 
 @Injectable({
 	providedIn: 'root'
 })
 export class ShoppingListService {
-	shoppingListItemCollection: AngularFirestoreCollection<ShoppingListItem>;
-	shoppingListItems: Observable<ShoppingListItem[]>;
+	shoppingListItemCollection: AngularFirestoreCollection<Ingredient>;
+	shoppingListItems: Observable<Ingredient[]>;
 
 	constructor(
 		private http: HttpClient,
 		private firestore: AngularFirestore) {
-		this.shoppingListItemCollection = this.firestore.collection<ShoppingListItem>('shopping-list');
+		this.shoppingListItemCollection = this.firestore.collection<Ingredient>('shopping-list');
 	}
 
 	fetchShoppingListFromMock(): Observable<{}> {
