@@ -1,5 +1,6 @@
 import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
 import { Ingredient } from 'src/app/recipes/recipe-item/ingredient.interface';
+import { ShoppingListService } from '../shopping-list.service';
 
 @Component({
 	selector: 'app-shopping-list-item',
@@ -9,4 +10,10 @@ import { Ingredient } from 'src/app/recipes/recipe-item/ingredient.interface';
 })
 export class ShoppingListItemComponent {
 	@Input() shoppingListItem: Ingredient;
+
+	constructor(private shoppingListService: ShoppingListService) {}
+
+	deleteIngredient(id: string) {
+		this.shoppingListService.deleteIngredient(id);
+	}
 }
