@@ -33,4 +33,21 @@ export class ShoppingListService {
 
 		return this.shoppingListItems;
 	}
+
+	addIngredient(ingredient: Ingredient) {
+		this.shoppingListItemCollection.add({
+			name: ingredient.name,
+			amount: ingredient.amount
+		});
+	}
+
+	deleteIngredient(id: string) {
+		this.shoppingListItemCollection.doc(id).delete()
+			.then(() => {
+				console.log('Document successfully deleted!');
+			})
+			.catch(error => {
+				console.error('Error removing document: ', error);
+			});
+	}
 }
