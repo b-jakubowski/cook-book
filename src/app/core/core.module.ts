@@ -15,7 +15,8 @@ import {
 	faCarrot,
 	faWeightHanging,
 	faEdit,
-	faTrashAlt
+	faTrashAlt,
+	faCheck
 } from '@fortawesome/free-solid-svg-icons';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -47,7 +48,8 @@ export class CoreModule {
 			faCarrot,
 			faWeightHanging,
 			faEdit,
-			faTrashAlt
+			faTrashAlt,
+			faCheck
 		);
 	}
 }
