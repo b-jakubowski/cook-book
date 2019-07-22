@@ -50,4 +50,14 @@ export class ShoppingListService {
 				console.error('Error removing document: ', error);
 			});
 	}
+
+	updateIngredient(id: string, ingredient: Ingredient) {
+		this.shoppingListItemCollection.doc(id).update(ingredient)
+			.then(() => {
+				console.log('Document successfully updated!');
+			})
+			.catch(error => {
+				console.error('Error removing document: ', error);
+			});
+	}
 }
