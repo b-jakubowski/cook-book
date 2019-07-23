@@ -1,0 +1,20 @@
+:host {
+	.panel-block {
+		cursor: auto;
+		padding: 0;
+	}
+	.delete-icon {
+		padding: 1em;
+		cursor: pointer;
+		:hover {
+			color: red;
+		}
+	}
+	.edit-icon {
+		padding: 1em;
+		cursor: pointer;
+		:hover {
+			color: blue;
+		}
+	}
+}

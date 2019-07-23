@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Ingredient } from 'src/app/recipes/recipe-item/ingredient.interface';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { ShoppingListService } from '../shopping-list.service';
 
 @Component({
 	selector: 'app-add-shopping-list-item',
@@ -6,4 +10,20 @@ import { Component } from '@angular/core';
 	styleUrls: ['./add-shopping-list-item.component.scss']
 })
 export class AddShoppingListItemComponent {
+	ingredient = new FormGroup({
+		ingredientName: new FormControl('', Validators.required),
+		ingredientAmount: new FormControl('', Validators.required)
+	});
+
+	constructor(private shoppingListService: ShoppingListService) {
+	}
+
+	onSubmit() {
+		if (this.ingredient.valid) {
+			this.shoppingListService.addIngredient({
+				name: this.ingredient.value.ingredientName,
+				amount: this.ingredient.value.ingredientAmount
+			});
+		}
+	}
 }

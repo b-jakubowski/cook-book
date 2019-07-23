@@ -1,17 +1,17 @@
-<div class="columns">
+<form class="columns" [formGroup]="ingredient">
   <div class="field column">
     <div class="control">
-      <input class="input is-primary" type="text" placeholder="Primary input">
+      <input class="input" type="text" placeholder="Item name" formControlName="ingredientName">
     </div>
   </div>
   <div class="field column is-narrow">
     <div class="control">
-    <input class="input is-primary" type="text" placeholder="Primary input">
+    <input class="input" type="text" placeholder="Item amount" formControlName="ingredientAmount">
   </div>
   </div>
   <div class="column is-narrow add-button">
-    <a class="button">
+    <a class="button" [attr.disabled]="!ingredient.valid ? '' : null" (click)="onSubmit()">
       <span class="icon"><fa-icon [icon]="'plus-circle'"></fa-icon></span>
     </a>
   </div>
-</div>
+</form>

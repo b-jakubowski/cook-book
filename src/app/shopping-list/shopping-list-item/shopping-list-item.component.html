@@ -1,10 +1,35 @@
-<a class="panel-block">
-  <div class="column">{{ shoppingListItem.name }}</div>
-  <div class="column is-narrow is-narrow-mobile">{{ shoppingListItem.amount }}</div>
-  <div class="column is-narrow is-narrow-mobile">
-    <span class="icon"><fa-icon [icon]="'edit'"></fa-icon></span>
-  </div>
-  <div class="column is-narrow is-narrow-mobile">
-    <span class="icon"><fa-icon [icon]="'trash-alt'"></fa-icon></span>
-  </div>
+<a class="panel-block" *ngIf="!isEdited; else editingMode">
+	<div class="column">{{ shoppingListItem.name }}</div>
+	<div class="column is-narrow is-narrow-mobile">{{ shoppingListItem.amount }}</div>
+	<div class="column is-narrow is-narrow-mobile">
+		<span class="icon edit-icon" (click)="isEdited = true">
+      <fa-icon [icon]="'edit'"></fa-icon>
+    </span>
+	</div>
+	<div class="column is-narrow is-narrow-mobile">
+		<span class="icon delete-icon" (click)="deleteIngredient(shoppingListItem.id)">
+      <fa-icon [icon]="'trash-alt'"></fa-icon>
+    </span>
+	</div>
 </a>
+
+<ng-template #editingMode>
+		<form class="panel-block" [formGroup]="editedIngredient">
+				<div class="column">
+					<input class="input" type="text" formControlName="ingredientName" [value]="shoppingListItem.name">
+				</div>
+				<div class="column is-narrow is-narrow-mobile">
+					<input class="input" type="text" formControlName="ingredientAmount" [value]="shoppingListItem.amount">
+				</div>
+				<div class="column is-narrow is-narrow-mobile">
+					<span class="icon edit-icon" (click)="updateIngredient(shoppingListItem.id)">
+            <fa-icon [icon]="'check'"></fa-icon>
+          </span>
+				</div>
+				<div class="column is-narrow is-narrow-mobile">
+					<span class="icon delete-icon" (click)="isEdited = false">
+            <fa-icon [icon]="'times'"></fa-icon>
+          </span>
+				</div>
+			</form>
+</ng-template>
