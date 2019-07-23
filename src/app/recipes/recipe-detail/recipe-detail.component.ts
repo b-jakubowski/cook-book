@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Route} from '@angular/router';
+import {Observable} from 'rxjs';
 
 @Component({
 	selector: 'app-recipe-detail',
@@ -6,5 +8,7 @@ import { Component } from '@angular/core';
 	styleUrls: ['./recipe-detail.component.scss']
 })
 export class RecipeDetailComponent {
+	activatedRouteId: Observable<Route> = this.activatedRoute.params;
+	constructor(private activatedRoute: ActivatedRoute) {}
 
 }

@@ -24,6 +24,8 @@ import { shoppingListReducer } from './shopping-list/store/shopping-list.reducer
 import { environment } from '../environments/environment';
 import { RecipeDetailIngredientsComponent } from './recipes/recipe-detail/recipe-detail-ingredients/recipe-detail-ingredients.component';
 import { RecipeDetailStepsComponent } from './recipes/recipe-detail/recipe-detail-steps/recipe-detail-steps.component';
+import { recipesReducer } from './recipes/store/recipes.reducer';
+import { RecipesEffects } from './recipes/store/recipes.effects';
 
 @NgModule({
 	declarations: [
@@ -47,8 +49,11 @@ import { RecipeDetailStepsComponent } from './recipes/recipe-detail/recipe-detai
 		ReactiveFormsModule,
 		AngularFireModule.initializeApp(environment.firebase, 'cookbook'),
 		AngularFirestoreModule,
-		EffectsModule.forRoot([ShoppingListEffects]),
-		StoreModule.forRoot({ shoppingList: shoppingListReducer }),
+		EffectsModule.forRoot([ShoppingListEffects, RecipesEffects]),
+		StoreModule.forRoot({
+			shoppingList: shoppingListReducer,
+			recipes: recipesReducer
+		}),
 		StoreDevtoolsModule.instrument({ logOnly: environment.production })
 	],
 	providers: [],
