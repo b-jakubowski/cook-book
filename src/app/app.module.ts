@@ -22,6 +22,8 @@ import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.com
 import { ShoppingListEffects } from './shopping-list/store/shopping-list.effects';
 import { shoppingListReducer } from './shopping-list/store/shopping-list.reducer';
 import { environment } from '../environments/environment';
+import { RecipeDetailIngredientsComponent } from './recipes/recipe-detail/recipe-detail-ingredients/recipe-detail-ingredients.component';
+import { RecipeDetailStepsComponent } from './recipes/recipe-detail/recipe-detail-steps/recipe-detail-steps.component';
 
 @NgModule({
 	declarations: [
@@ -34,6 +36,8 @@ import { environment } from '../environments/environment';
 		ShoppingListItemComponent,
 		AddShoppingListItemComponent,
 		RecipeDetailComponent,
+		RecipeDetailIngredientsComponent,
+		RecipeDetailStepsComponent,
 	],
 	imports: [
 		BrowserModule,
