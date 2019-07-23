@@ -12,7 +12,7 @@ import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { RecipesComponent } from './recipes/recipes.component';
 import { RecipeListComponent } from './recipes/recipe-list/recipe-list.component';
-import { RecipeItemComponent } from './recipes/recipe-item/recipe-item.component';
+import {RecipeListItemComponent} from './recipes/recipe-list/recipe-list-item/recipe-list-item.component';
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { AppRoutingModule } from './app-routing.module';
 import { EditRecipeComponent } from './recipes/edit-recipe/edit-recipe.component';
@@ -28,7 +28,7 @@ import { environment } from '../environments/environment';
 		AppComponent,
 		RecipesComponent,
 		RecipeListComponent,
-		RecipeItemComponent,
+		RecipeListItemComponent,
 		EditRecipeComponent,
 		ShoppingListComponent,
 		ShoppingListItemComponent,

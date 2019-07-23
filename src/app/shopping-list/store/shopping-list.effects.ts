@@ -2,10 +2,8 @@ import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType, createEffect } from '@ngrx/effects';
 
 import * as ShoppingListActions from './shopping-list.actions';
-import { Observable } from 'rxjs';
-import { AngularFireDatabase } from '@angular/fire/database';
 import { map, mergeMap } from 'rxjs/operators';
-import { Ingredient } from 'src/app/recipes/recipe-item/ingredient.interface';
+import { Ingredient } from 'src/app/recipes/ingredient.interface';
 import { ShoppingListService } from '../shopping-list.service';
 
 export type Action = ShoppingListActions.ShoppingListActions;

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {AngularFirestore, AngularFirestoreCollection} from '@angular/fire/firestore';
-import {Recipe} from './recipe-item/recipe.interface';
+import {Recipe} from './recipe.interface';
 import {map} from 'rxjs/operators';
 
 @Injectable({

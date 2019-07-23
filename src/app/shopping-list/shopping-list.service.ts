@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import {map} from 'rxjs/operators';
-import { Ingredient } from '../recipes/recipe-item/ingredient.interface';
+import { Ingredient } from '../recipes/ingredient.interface';
 
 @Injectable({
 	providedIn: 'root'

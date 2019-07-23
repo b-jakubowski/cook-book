@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
-import { Ingredient } from 'src/app/recipes/recipe-item/ingredient.interface';
+import { Ingredient } from 'src/app/recipes/ingredient.interface';
 import { ShoppingListService } from '../shopping-list.service';
 import { FormGroup, FormControl } from '@angular/forms';
 

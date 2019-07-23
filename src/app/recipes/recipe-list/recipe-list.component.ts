@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Recipe } from '../recipe-item/recipe.interface';
+import { Recipe } from '../recipe.interface';
 import { Observable } from 'rxjs';
 import { RecipesService } from '../recipes.service';
 
