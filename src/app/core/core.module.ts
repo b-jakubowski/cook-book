@@ -16,7 +16,8 @@ import {
 	faWeightHanging,
 	faEdit,
 	faTrashAlt,
-	faCheck
+	faCheck,
+	faTimes
 } from '@fortawesome/free-solid-svg-icons';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -49,7 +50,8 @@ export class CoreModule {
 			faWeightHanging,
 			faEdit,
 			faTrashAlt,
-			faCheck
+			faCheck,
+			faTimes
 		);
 	}
 }
