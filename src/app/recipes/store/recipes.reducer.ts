@@ -1,27 +1,34 @@
 import * as RecipesActions from './recipes.actions';
 import { Recipe } from '../recipe.interface';
+import { createEntityAdapter, EntityState } from '@ngrx/entity';
+import {createFeatureSelector} from '@ngrx/store';
 
-export interface State {
-	recipes: Recipe[];
-}
+export const recipeAdapter = createEntityAdapter<Recipe>();
 
-export type Action = RecipesActions.RecipesActions;
+export interface State extends EntityState<Recipe> {}
+
+export const initialState: State = recipeAdapter.getInitialState(null);
 
 export function recipesReducer(
-	state: State,
+	state: State = initialState,
 	action: RecipesActions.RecipesActions
 ) {
 	switch (action.type) {
 		case RecipesActions.FETCH_RECIPES:
-			return {
-				...state
-			};
+			return initialState;
 		case RecipesActions.FETCH_RECIPES_SUCCESS:
-			return {
-				...state,
-				recipes: [...action.payload]
-			};
+			return recipeAdapter.addAll(action.payload, state);
 		default:
 			return state;
 	}
 }
+
+
+export const getRecipesState = createFeatureSelector<State>('recipes');
+
+export const {
+	selectIds,
+	selectEntities,
+	selectAll,
+	selectTotal,
+} = recipeAdapter.getSelectors(getRecipesState);
