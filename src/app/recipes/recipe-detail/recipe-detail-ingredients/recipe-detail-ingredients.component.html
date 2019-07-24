@@ -1,3 +1,7 @@
-<p>
-  recipe-detail-ingredients works!
-</p>
+<ng-container *ngIf="(selectedRecipe$ | async)">
+    <div class="list">
+      <a class="list-item" *ngFor="let ingredient of (selectedRecipe$ | async).ingredients">
+        {{ ingredient.name }} {{ ingredient.amount }}
+      </a>
+    </div>
+</ng-container>
