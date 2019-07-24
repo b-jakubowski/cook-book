@@ -1,11 +1,21 @@
+<ng-container *ngIf="(selectedRecipe$ | async)">
+  <img [src]="(selectedRecipe$ | async).imagePath" alt="recipe image">
+</ng-container>
+
 <div class="tabs is-centered is-medium">
   <ul>
-    <li routerLinkActive="is-active">
-      <a routerLink="ingredients">Ingredients</a>
+    <li [ngClass]="{'is-active': isIngredientsTabSelected}">
+      <a (click)="onIngredientsTabClick()">Ingredients</a>
     </li>
-    <li routerLinkActive="is-active">
-      <a routerLink="steps">Steps</a>
+    <li [ngClass]="{'is-active': isStepsTabSelected}">
+      <a (click)="onStepsTabClick()">Steps</a>
     </li>
   </ul>
 </div>
-<router-outlet></router-outlet>
+
+<ng-container *ngIf="isIngredientsTabSelected; else recipeSteps">
+  <app-recipe-detail-ingredients [selectedRecipe$]="selectedRecipe$"></app-recipe-detail-ingredients>
+</ng-container>
+<ng-template #recipeSteps>
+  <app-recipe-detail-steps [selectedRecipe$]="selectedRecipe$"></app-recipe-detail-steps>
+</ng-template>
