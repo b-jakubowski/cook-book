@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import { Component } from '@angular/core';
 import { Recipe } from '../recipe.interface';
 import { Observable } from 'rxjs';
-import {Store} from '@ngrx/store';
+import { Store } from '@ngrx/store';
+import * as fromRecipes from '../store/recipes.reducer';
 
 @Component({
 	selector: 'app-recipe-list',
@@ -9,7 +10,7 @@ import {Store} from '@ngrx/store';
 	styleUrls: ['./recipe-list.component.scss'],
 })
 export class RecipeListComponent {
-	recipes: Observable<Recipe[]> = this.store.select(state => state.recipes);
+	recipes: Observable<Recipe[]> = this.store.select(state => fromRecipes.selectAll(state));
 
-	constructor(private store: Store<{ recipes: Recipe[] }>) {}
+	constructor(private store: Store<{ recipes: { entities: Recipe[] } }>) {}
 }
