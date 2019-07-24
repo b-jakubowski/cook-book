@@ -1,5 +1,19 @@
 <ng-container *ngIf="(selectedRecipe$ | async)">
-  <img [src]="(selectedRecipe$ | async).imagePath" alt="recipe image">
+		<div class="columns">
+			<div class="column">
+				<p>{{(selectedRecipe$ | async).name}}</p>
+				<p>{{(selectedRecipe$ | async).time}}</p>
+				<p>{{(selectedRecipe$ | async).kcal}} kcal</p>
+				<p>{{(selectedRecipe$ | async).ingredients.length}} ingredients</p>
+				<ng-container *ngFor="let category of (selectedRecipe$ | async).category">
+					<span class="tag is-primary is-medium">{{category}}</span>
+				</ng-container>
+			</div>
+			<div class="column">
+					<img [src]="(selectedRecipe$ | async).imagePath" alt="recipe image">
+			</div>
+		</div>
+  
 </ng-container>
 
 <div class="tabs is-centered is-medium">
