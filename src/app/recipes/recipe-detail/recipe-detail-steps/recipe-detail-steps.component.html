@@ -1,0 +1,7 @@
+<ng-container *ngIf="(selectedRecipe$ | async)">
+  <nav class="panel">
+    <a class="panel-block" *ngFor="let step of (selectedRecipe$ | async).description; let i = index">
+      <p><span class="has-text-weight-bold">{{i + 1}}. </span>{{ step }}</p>
+    </a>
+  </nav>
+</ng-container>

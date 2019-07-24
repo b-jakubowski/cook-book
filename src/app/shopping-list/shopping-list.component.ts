@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Observable} from 'rxjs';
-import {ShoppingListService} from './shopping-list.service';
 import { Store } from '@ngrx/store';
-import { Ingredient } from '../recipes/recipe-item/ingredient.interface';
+import { Ingredient } from '../recipes/ingredient.interface';
 import * as ShoppingListActions from './store/shopping-list.actions';
 
 @Component({

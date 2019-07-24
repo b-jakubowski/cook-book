@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Ingredient } from 'src/app/recipes/recipe-item/ingredient.interface';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { ShoppingListService } from '../shopping-list.service';
 
 @Component({

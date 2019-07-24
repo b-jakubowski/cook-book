@@ -12,7 +12,7 @@ import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { RecipesComponent } from './recipes/recipes.component';
 import { RecipeListComponent } from './recipes/recipe-list/recipe-list.component';
-import { RecipeItemComponent } from './recipes/recipe-item/recipe-item.component';
+import {RecipeListItemComponent} from './recipes/recipe-list/recipe-list-item/recipe-list-item.component';
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { AppRoutingModule } from './app-routing.module';
 import { EditRecipeComponent } from './recipes/edit-recipe/edit-recipe.component';
@@ -22,18 +22,24 @@ import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.com
 import { ShoppingListEffects } from './shopping-list/store/shopping-list.effects';
 import { shoppingListReducer } from './shopping-list/store/shopping-list.reducer';
 import { environment } from '../environments/environment';
+import { RecipeDetailIngredientsComponent } from './recipes/recipe-detail/recipe-detail-ingredients/recipe-detail-ingredients.component';
+import { RecipeDetailStepsComponent } from './recipes/recipe-detail/recipe-detail-steps/recipe-detail-steps.component';
+import { recipesReducer } from './recipes/store/recipes.reducer';
+import { RecipesEffects } from './recipes/store/recipes.effects';
 
 @NgModule({
 	declarations: [
 		AppComponent,
 		RecipesComponent,
 		RecipeListComponent,
-		RecipeItemComponent,
+		RecipeListItemComponent,
 		EditRecipeComponent,
 		ShoppingListComponent,
 		ShoppingListItemComponent,
 		AddShoppingListItemComponent,
 		RecipeDetailComponent,
+		RecipeDetailIngredientsComponent,
+		RecipeDetailStepsComponent,
 	],
 	imports: [
 		BrowserModule,
@@ -43,8 +49,11 @@ import { environment } from '../environments/environment';
 		ReactiveFormsModule,
 		AngularFireModule.initializeApp(environment.firebase, 'cookbook'),
 		AngularFirestoreModule,
-		EffectsModule.forRoot([ShoppingListEffects]),
-		StoreModule.forRoot({ shoppingList: shoppingListReducer }),
+		EffectsModule.forRoot([ShoppingListEffects, RecipesEffects]),
+		StoreModule.forRoot({
+			shoppingList: shoppingListReducer,
+			recipes: recipesReducer
+		}),
 		StoreDevtoolsModule.instrument({ logOnly: environment.production })
 	],
 	providers: [],

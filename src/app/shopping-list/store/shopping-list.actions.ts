@@ -1,4 +1,4 @@
-import { Ingredient } from 'src/app/recipes/recipe-item/ingredient.interface';
+import { Ingredient } from 'src/app/recipes/ingredient.interface';
 import { Action } from '@ngrx/store';
 
 export const ADD_INGREDIENT = '[Shopping List] Add Ingredient';
