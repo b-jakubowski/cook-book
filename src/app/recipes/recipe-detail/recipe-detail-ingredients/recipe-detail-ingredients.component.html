@@ -1,7 +1,7 @@
 <ng-container *ngIf="(selectedRecipe$ | async)">
-    <div class="list">
-      <a class="list-item" *ngFor="let ingredient of (selectedRecipe$ | async).ingredients">
-        {{ ingredient.name }} {{ ingredient.amount }}
-      </a>
-    </div>
+  <nav class="panel">
+    <a class="panel-block" *ngFor="let ingredient of (selectedRecipe$ | async).ingredients">
+      <p>{{ ingredient.name }} {{ ingredient.amount }}</p>
+    </a>
+  </nav>
 </ng-container>
