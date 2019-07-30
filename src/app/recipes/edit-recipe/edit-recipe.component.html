@@ -1,3 +1,74 @@
-<p>
-  edit-recipe works!
-</p>
+<div class="field">
+	<label class="label">Recipe name</label>
+	<div class="control">
+		<input class="input" type="text" placeholder="What is recipe name?">
+	</div>
+</div>
+
+<label class="label">Categories</label>
+<div class="columns">
+	<div class="field column">
+		<div class="control">
+			<input class="input" type="text" placeholder="Category name">
+		</div>
+	</div>
+	<div class="column is-narrow add-button">
+		<a class="button" (click)="onSubmit()">
+			<span class="icon"><fa-icon [icon]="'plus-circle'"></fa-icon></span>
+		</a>
+	</div>
+</div>
+
+<label class="label">Steps</label>
+<div class="columns">
+	<div class="field column">
+		<div class="control">
+			<input class="input" type="text" placeholder="Describe recipe preparation step">
+		</div>
+	</div>
+	<div class="column is-narrow add-button">
+		<a class="button" (click)="onSubmit()">
+			<span class="icon"><fa-icon [icon]="'plus-circle'"></fa-icon></span>
+		</a>
+	</div>
+</div>
+
+<label class="label">Ingredients</label>
+<div class="columns">
+	<div class="field column">
+		<div class="control">
+			<input class="input" type="text" placeholder="Item name">
+		</div>
+	</div>
+	<div class="field column is-narrow">
+		<div class="control">
+		<input class="input" type="text" placeholder="Item amount">
+	</div>
+	</div>
+	<div class="column is-narrow add-button">
+		<a class="button" (click)="onSubmit()">
+			<span class="icon"><fa-icon [icon]="'plus-circle'"></fa-icon></span>
+		</a>
+	</div>
+</div>
+
+<div class="field">
+	<label class="label">Kcal amount</label>
+	<div class="control">
+		<input class="input" type="text" placeholder="Type amount of kcal">
+	</div>
+</div>
+
+<div class="field">
+	<label class="label">Preparation time</label>
+	<div class="control">
+		<input class="input" type="text" placeholder="How much time do we need?">
+	</div>
+</div>
+
+<div class="field">
+	<label class="label">Recipe Image URL</label>
+	<div class="control">
+		<input class="input" type="text" placeholder="Please paste URL of recipe image">
+	</div>
+</div>
