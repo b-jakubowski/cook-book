@@ -74,11 +74,23 @@ export class EditRecipeComponent {
 		this.steps.removeAt(key);
 	}
 
+	deleteIngredient(key: number): void {
+		this.ingredients.removeAt(key);
+	}
+
 	onCategoryKey(event: any) {
 		this.categoryInputVal = event.target.value;
 	}
 
 	onStepKey(event: any) {
 		this.stepInputVal = event.target.value;
+	}
+
+	onIngrNameKey(event: any) {
+		this.ingrNameInputVal = event.target.value;
+	}
+
+	onIngrAmountKey(event: any) {
+		this.ingrAmountInputVal = event.target.value;
 	}
 }
