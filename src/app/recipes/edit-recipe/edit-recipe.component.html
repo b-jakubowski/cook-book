@@ -31,7 +31,7 @@
   <div class="columns">
     <div class="field column categories-field">
       <div class="control">
-        <input (keyup)="onCategoryKey($event)" class="input" type="text" placeholder="Category name" [value]="categoryInputVal">
+        <input (keyup)="onCategoryKey($event)" class="input is-primary" type="text" placeholder="Category name" [value]="categoryInputVal">
       </div>
     </div>
     <div class="column is-narrow is-narrow-mobile">
@@ -41,7 +41,7 @@
     </div>
   </div>
   <nav class="panel">
-    <a class="panel-block" *ngFor="let category of recipeForm.get('categories').controls; let i = index;">
+    <a class="panel-block category-panel" *ngFor="let category of recipeForm.get('categories').controls; let i = index;">
       <div class="column">{{ category.value.name }}</div>
       <div class="column is-narrow is-narrow-mobile">
         <span class="icon delete-icon" (click)="deleteCategory(i)">
@@ -53,17 +53,27 @@
 
   <label class="label">Steps</label>
   <div class="columns">
-    <div class="field column">
+    <div class="field column categories-field">
       <div class="control">
-        <input class="input" type="text" placeholder="Describe recipe preparation step">
+        <input (keyup)="onStepKey($event)" class="input is-info" type="text" placeholder="Category name" [value]="stepInputVal">
       </div>
     </div>
-    <div class="column is-narrow add-button">
-      <a class="button">
+    <div class="column is-narrow is-narrow-mobile">
+      <a class="button" (click)="addStep(stepInputVal)">
         <span class="icon"><fa-icon [icon]="'plus-circle'"></fa-icon></span>
       </a>
     </div>
   </div>
+  <nav class="panel">
+    <a class="panel-block step-panel" *ngFor="let step of recipeForm.get('steps').controls; let i = index;">
+      <div class="column">{{ step.value.name }}</div>
+      <div class="column is-narrow is-narrow-mobile">
+        <span class="icon delete-icon" (click)="deleteStep(i)">
+          <fa-icon [icon]="'trash-alt'"></fa-icon>
+        </span>
+      </div>
+    </a>
+  </nav>
 
   <label class="label">Ingredients</label>
   <div class="columns">
