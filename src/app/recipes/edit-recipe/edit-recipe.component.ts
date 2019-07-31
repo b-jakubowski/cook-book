@@ -13,12 +13,16 @@ export class EditRecipeComponent {
 		kcal: new FormControl(''),
 		imagePath: new FormControl(''),
 		categories: this.formBuilder.array([]),
-		steps: this.formBuilder.array([])
+		steps: this.formBuilder.array([]),
+		ingredients: this.formBuilder.array([])
 	});
 	categories: FormArray;
 	steps: FormArray;
+	ingredients: FormArray;
 	categoryInputVal = '';
 	stepInputVal = '';
+	ingrNameInputVal = '';
+	ingrAmountInputVal = '';
 
 	constructor(private formBuilder: FormBuilder) {}
 
@@ -34,6 +38,15 @@ export class EditRecipeComponent {
 		);
 	}
 
+	createIngredient(nameVal, amountVal) {
+		this.ingredients.push(
+			this.formBuilder.group({
+				name: nameVal,
+				amount: amountVal
+			})
+		);
+	}
+
 	addCategory(value: string): void {
 		this.categories = this.recipeForm.get('categories') as FormArray;
 		this.pushToFormArray(this.categories, value);
@@ -44,6 +57,13 @@ export class EditRecipeComponent {
 		this.steps = this.recipeForm.get('steps') as FormArray;
 		this.pushToFormArray(this.steps, value);
 		this.stepInputVal = '';
+	}
+
+	addIngredient(value: string, amount: string): void {
+		this.ingredients = this.recipeForm.get('ingredients') as FormArray;
+		this.createIngredient(value, amount);
+		this.ingrNameInputVal = '';
+		this.ingrAmountInputVal = '';
 	}
 
 	deleteCategory(key: number): void {
