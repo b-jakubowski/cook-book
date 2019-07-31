@@ -54,7 +54,7 @@ import { RecipesEffects } from './recipes/store/recipes.effects';
 			shoppingList: shoppingListReducer,
 			recipes: recipesReducer
 		}),
-		StoreDevtoolsModule.instrument({ logOnly: environment.production })
+		StoreDevtoolsModule.instrument({logOnly: environment.production}),
 	],
 	providers: [],
 	bootstrap: [AppComponent]

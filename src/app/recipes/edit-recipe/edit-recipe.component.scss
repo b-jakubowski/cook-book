@@ -1,0 +1,19 @@
+:host {
+  .columns {
+    margin-bottom: 0;
+  }
+
+  .button {
+    &.is-success {
+      margin-top: 1em;
+    }
+  }
+
+  .panel-block {
+    padding: 0;
+  }
+
+  .categories-field {
+    margin-bottom: 0;
+  }
+}
