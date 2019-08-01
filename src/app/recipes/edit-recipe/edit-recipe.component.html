@@ -2,7 +2,7 @@
 	<div class="field">
 		<label class="label">Recipe name</label>
 		<div class="control">
-			<input class="input" type="text" placeholder="What is recipe name?" formControlName="recipeName">
+			<input class="input is-primary" type="text" placeholder="What is recipe name?" formControlName="name">
 		</div>
 	</div>
 
@@ -20,7 +20,7 @@
 		</div>
 	</div>
 
-	<div class="field">
+	<div class="field recipe-field">
 		<label class="label">Recipe Image URL</label>
 		<div class="control">
 			<input class="input" type="text" placeholder="Paste URL of recipe image" formControlName="imagePath">
@@ -31,11 +31,11 @@
 	<div class="columns">
 		<div class="field column categories-field">
 			<div class="control">
-				<input (keyup)="onCategoryKey($event)" class="input is-primary" type="text" placeholder="Category name" [value]="categoryInputVal">
+				<input (keyup)="onCategoryKey($event)" class="input" type="text" placeholder="Category name" [value]="categoryInputVal">
 			</div>
 		</div>
 		<div class="column is-narrow is-narrow-mobile">
-			<a class="button" (click)="addCategory(categoryInputVal)">
+			<a class="button" [attr.disabled]="!categoryInputVal.length ? '' : null" (click)="addCategory(categoryInputVal)">
 				<span class="icon"><fa-icon [icon]="'plus-circle'"></fa-icon></span>
 			</a>
 		</div>
@@ -55,11 +55,11 @@
 	<div class="columns">
 		<div class="field column categories-field">
 			<div class="control">
-				<input (keyup)="onStepKey($event)" class="input is-info" type="text" placeholder="Category name" [value]="stepInputVal">
+				<input (keyup)="onStepKey($event)" class="input" type="text" placeholder="Category name" [value]="stepInputVal">
 			</div>
 		</div>
 		<div class="column is-narrow is-narrow-mobile">
-			<a class="button" (click)="addStep(stepInputVal)">
+			<a class="button" [attr.disabled]="!stepInputVal.length ? '' : null" (click)="addStep(stepInputVal)">
 				<span class="icon"><fa-icon [icon]="'plus-circle'"></fa-icon></span>
 			</a>
 		</div>
@@ -79,21 +79,23 @@
 	<div class="columns">
 		<div class="field column">
 			<div class="control">
-				<input (keyup)="onIngrNameKey($event)" class="input is-warning" type="text" placeholder="Ingredient name" [value]="ingrNameInputVal">
+				<input (keyup)="onIngrNameKey($event)" class="input" type="text" placeholder="Ingredient name" [value]="ingrNameInputVal">
 			</div>
 		</div>
 		<div class="field column is-narrow">
 			<div class="control">
-			<input (keyup)="onIngrAmountKey($event)" class="input is-warning" type="text" placeholder="Ingredient amount" [value]="ingrAmountInputVal">
+			<input (keyup)="onIngrAmountKey($event)" class="input" type="text" placeholder="Ingredient amount" [value]="ingrAmountInputVal">
 		</div>
 		</div>
 		<div class="column is-narrow add-button">
-			<a class="button" (click)="addIngredient(ingrNameInputVal, ingrAmountInputVal)">
+			<a class="button"
+         [attr.disabled]="(!ingrNameInputVal.length || !ingrAmountInputVal.length) ? '' : null"
+         (click)="addIngredient(ingrNameInputVal, ingrAmountInputVal)">
 				<span class="icon"><fa-icon [icon]="'plus-circle'"></fa-icon></span>
 			</a>
 		</div>
 	</div>
-	
+
 	<nav class="panel">
 		<a class="panel-block ingredient-panel" *ngFor="let ingredient of recipeForm.get('ingredients').controls; let i = index;">
 			<div class="column">{{ ingredient.value.name }}</div>
@@ -107,4 +109,4 @@
 	</nav>
 </form>
 
-<a class="button is-success is-medium" (click)="onSubmit()">Success</a>
+<a class="button is-success is-medium" [attr.disabled]="!recipeForm.valid ? '' : null" (click)="onSubmit()">Success</a>

@@ -1,5 +1,8 @@
 import {Component} from '@angular/core';
-import {FormArray, FormBuilder, FormControl} from '@angular/forms';
+import {FormArray, FormBuilder, FormControl, Validators} from '@angular/forms';
+import {RecipesService} from '../recipes.service';
+import {Recipe} from '../recipe.interface';
+import {Router} from '@angular/router';
 
 @Component({
 	selector: 'app-edit-recipe',
@@ -8,13 +11,13 @@ import {FormArray, FormBuilder, FormControl} from '@angular/forms';
 })
 export class EditRecipeComponent {
 	recipeForm = this.formBuilder.group({
-		recipeName: new FormControl(''),
-		time: new FormControl(''),
+		name: new FormControl('', Validators.required),
+		time: new FormControl('', Validators.required),
 		kcal: new FormControl(''),
 		imagePath: new FormControl(''),
-		categories: this.formBuilder.array([]),
-		steps: this.formBuilder.array([]),
-		ingredients: this.formBuilder.array([])
+		categories: this.formBuilder.array([], Validators.required),
+		steps: this.formBuilder.array([], Validators.required),
+		ingredients: this.formBuilder.array([], Validators.required)
 	});
 	categories: FormArray;
 	steps: FormArray;
@@ -24,10 +27,31 @@ export class EditRecipeComponent {
 	ingrNameInputVal = '';
 	ingrAmountInputVal = '';
 
-	constructor(private formBuilder: FormBuilder) {}
+	constructor(
+		private formBuilder: FormBuilder,
+		private recipeService: RecipesService,
+		private router: Router
+	) {}
 
 	onSubmit() {
-		console.log(this.recipeForm.value);
+		if (this.recipeForm.valid) {
+			const recipeFormVals: Recipe = {
+				name: this.recipeForm.value.name,
+				category: [],
+				description: [],
+				ingredients: this.recipeForm.value.ingredients,
+				time: this.recipeForm.value.time,
+				kcal: this.recipeForm.value.kcal ? this.recipeForm.value.kcal : null,
+				imagePath: this.recipeForm.value.imagePath ? this.recipeForm.value.imagePath : '',
+			};
+
+			this.recipeForm.value.categories.forEach(category => recipeFormVals.category.push(category.name));
+			this.recipeForm.value.steps.forEach(step => recipeFormVals.description.push(step.name));
+
+			this.recipeService.addRecipe(recipeFormVals);
+
+			this.router.navigate(['/recipes']);
+		}
 	}
 
 	pushToFormArray(arr: FormArray, value: string) {
@@ -49,21 +73,27 @@ export class EditRecipeComponent {
 
 	addCategory(value: string): void {
 		this.categories = this.recipeForm.get('categories') as FormArray;
-		this.pushToFormArray(this.categories, value);
-		this.categoryInputVal = '';
+		if (value.length) {
+			this.pushToFormArray(this.categories, value);
+			this.categoryInputVal = '';
+		}
 	}
 
 	addStep(value: string): void {
 		this.steps = this.recipeForm.get('steps') as FormArray;
-		this.pushToFormArray(this.steps, value);
-		this.stepInputVal = '';
+		if (value.length) {
+			this.pushToFormArray(this.steps, value);
+			this.stepInputVal = '';
+		}
 	}
 
 	addIngredient(value: string, amount: string): void {
 		this.ingredients = this.recipeForm.get('ingredients') as FormArray;
-		this.createIngredient(value, amount);
-		this.ingrNameInputVal = '';
-		this.ingrAmountInputVal = '';
+		if (value.length && amount.length) {
+			this.createIngredient(value, amount);
+			this.ingrNameInputVal = '';
+			this.ingrAmountInputVal = '';
+		}
 	}
 
 	deleteCategory(key: number): void {
