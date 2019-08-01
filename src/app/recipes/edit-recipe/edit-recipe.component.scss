@@ -1,0 +1,32 @@
+:host {
+  .columns {
+    margin-bottom: 0;
+  }
+
+  .button {
+    &.is-success {
+      margin-top: 1em;
+    }
+  }
+
+  .panel-block {
+    padding: 0;
+  }
+
+  .category-panel {
+    background-color: rgba(0, 209, 178, 0.12);
+  }
+  .step-panel {
+    background-color: rgba(32, 156, 238, 0.12);
+	}
+	.ingredient-panel {
+		background-color: rgba(255, 221, 87, 0.12);
+	}
+
+  .categories-field {
+    margin-bottom: 0;
+  }
+  .recipe-field {
+    margin-bottom: 1.5em;
+  }
+}

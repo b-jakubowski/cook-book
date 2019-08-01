@@ -33,4 +33,16 @@ export class RecipesService {
 
 		return this.recipes;
 	}
+
+	addRecipe(recipe: Recipe) {
+		this.recipeCollection.add({
+			name: recipe.name,
+			category: recipe.category,
+			description: recipe.description,
+			ingredients: recipe.ingredients,
+			time: recipe.time,
+			kcal: recipe.kcal ? recipe.kcal : null,
+			imagePath: recipe.imagePath ? recipe.imagePath : '',
+		});
+	}
 }

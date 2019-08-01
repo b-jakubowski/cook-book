@@ -2,7 +2,6 @@ import { Recipe } from '../../app/recipes/recipe.interface';
 
 export const recipes: Recipe[] = [
 	{
-		id: '1',
 		name: 'Burger wołowy',
 		category: ['obiad', 'fastfood'],
 		description: [
@@ -45,7 +44,6 @@ export const recipes: Recipe[] = [
 			'-207p_d9270c5c545b30ea094084c7f2342eb4.fit-760w.jpg'
 	},
 	{
-		id: '2',
 		name: 'Kasza jęczmienna pęczak z ciecierzycą w sosie pomidorowym',
 		category: ['obiad', 'no-meat'],
 		description: [
