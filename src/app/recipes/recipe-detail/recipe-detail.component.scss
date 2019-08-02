@@ -10,11 +10,22 @@
     object-fit: cover;
   }
   .tag {
-    margin-top: 2em;
-    margin-right: 0.5em;
+    //margin-top: 2em;
+    margin-left: 0.5em;
     &:hover {
       cursor: pointer;
       background-color: #00c2a3;
     }
+  }
+
+  .edit-delete-btns {
+    .button {
+      margin-right: 0.5em;
+    }
+  }
+
+  .categories-tags {
+    margin-top: 0.3em;
+    display: flex;
   }
 }
