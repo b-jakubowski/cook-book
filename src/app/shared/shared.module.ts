@@ -5,12 +5,14 @@ import { NavbarMobileMenuComponent } from './navbar/navbar-mobile-menu/navbar-mo
 import { NavbarDesktopMenuComponent } from './navbar/navbar-desktop-menu/navbar-desktop-menu.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { RouterModule } from '@angular/router';
+import { ConfirmationModalComponent } from './confirmation-modal/confirmation-modal.component';
 
 const components = [
 	NavbarComponent,
 	NavbarMobileMenuComponent,
 	NavbarDesktopMenuComponent,
-	SidebarComponent
+	SidebarComponent,
+	ConfirmationModalComponent
 ];
 
 @NgModule({
