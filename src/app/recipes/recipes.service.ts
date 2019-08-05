@@ -45,4 +45,14 @@ export class RecipesService {
 			imagePath: recipe.imagePath ? recipe.imagePath : '',
 		});
 	}
+
+	deleteRecipe(id: string) {
+		this.recipeCollection.doc(id).delete()
+			.then(() => {
+				console.log('Recipe successfully deleted!');
+			})
+			.catch(error => {
+				console.error('Error removing Recipe: ', error);
+			});
+	}
 }
