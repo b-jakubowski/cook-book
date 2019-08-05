@@ -1,4 +1,11 @@
 <ng-container *ngIf="(selectedRecipe$ | async)">
+  <a class="button back-btn is-light" (click)="backToRecipeList()">
+    <span class="icon is-small">
+      <fa-icon [icon]="'arrow-circle-left'"></fa-icon>
+    </span>
+    <span>Back</span>
+  </a>
+
 		<div class="columns">
 			<div class="column recipe-info">
         <div>

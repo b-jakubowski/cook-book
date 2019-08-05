@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {Observable} from 'rxjs';
 import { Store } from '@ngrx/store';
 import { Recipe } from '../recipe.interface';
@@ -17,7 +17,11 @@ export class RecipeDetailComponent {
 	isStepsTabSelected = false;
 	isModalActive = false;
 
-	constructor(private activatedRoute: ActivatedRoute, private store: Store<{ recipes: { entities: Recipe[] } }>) {}
+	constructor(
+		private activatedRoute: ActivatedRoute,
+		private store: Store<{ recipes: { entities: Recipe[] } }>,
+		private router: Router
+	) {}
 
 	onIngredientsTabClick() {
 		this.isIngredientsTabSelected = true;
@@ -35,5 +39,9 @@ export class RecipeDetailComponent {
 
 	isModalClosed(closed: boolean) {
 		this.isModalActive = !closed;
+	}
+
+	backToRecipeList() {
+		this.router.navigate(['/recipes']);
 	}
 }
