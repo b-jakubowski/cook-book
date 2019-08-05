@@ -27,6 +27,7 @@
 		</div>
 	</div>
 
+  <!--  CATEGORIES -->
 	<label class="label">Categories</label>
 	<div class="columns">
 		<div class="field column categories-field">
@@ -51,6 +52,7 @@
 		</a>
 	</nav>
 
+  <!--  STEPS -->
 	<label class="label">Steps</label>
 	<div class="columns">
 		<div class="field column categories-field">
@@ -64,17 +66,16 @@
 			</a>
 		</div>
 	</div>
-	<nav class="panel">
-		<a class="panel-block step-panel" *ngFor="let step of recipeForm.get('steps').controls; let i = index;">
-			<div class="column">{{ step.value.name }}</div>
-			<div class="column is-narrow is-narrow-mobile">
-				<span class="icon delete-icon" (click)="deleteStep(i)">
-					<fa-icon [icon]="'trash-alt'"></fa-icon>
-				</span>
-			</div>
-		</a>
-	</nav>
+  <nav class="panel">
+    <a class="panel-block step-panel" *ngFor="let step of recipeForm.get('steps').controls; let i = index;">
+      <app-edit-recipe-step
+        [recipeStep]="step"
+        [recipeStepIndex]="i"
+      (deleteStepKey)="deleteStep($event)"></app-edit-recipe-step>
+    </a>
+  </nav>
 
+  <!--  INGREDIENTS  -->
 	<label class="label">Ingredients</label>
 	<div class="columns">
 		<div class="field column">

@@ -1,0 +1,31 @@
+<ng-container *ngIf="!isStepEdited; else editingMode">
+    <div class="column">{{ recipeStep.value.name }}</div>
+    <div class="column is-narrow is-narrow-mobile">
+      <span class="icon edit-icon" (click)="isStepEdited = true">
+        <fa-icon [icon]="'edit'"></fa-icon>
+      </span>
+    </div>
+    <div class="column is-narrow is-narrow-mobile">
+        <span class="icon delete-icon" (click)="deleteStep(recipeStepIndex)">
+          <fa-icon [icon]="'trash-alt'"></fa-icon>
+        </span>
+    </div>
+</ng-container>
+
+<ng-template #editingMode>
+  <form [formGroup]="editedStep" class="edit-step">
+    <div class="column">
+      <input class="input" type="text" formControlName="stepName" [value]="recipeStep.value.name">
+    </div>
+    <div class="column is-narrow is-narrow-mobile">
+      <span class="icon edit-icon" (click)="updateStepName()">
+        <fa-icon [icon]="'check'"></fa-icon>
+      </span>
+    </div>
+    <div class="column is-narrow is-narrow-mobile">
+      <span class="icon delete-icon" (click)="isStepEdited = false">
+        <fa-icon [icon]="'times'"></fa-icon>
+      </span>
+    </div>
+  </form>
+</ng-template>

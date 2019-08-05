@@ -1,0 +1,23 @@
+:host {
+  width: 100%;
+  display: flex;
+  .edit-step {
+    width: 100%;
+    display: flex;
+  }
+
+  .delete-icon {
+    padding: 1em;
+    cursor: pointer;
+    :hover {
+      color: red;
+    }
+  }
+  .edit-icon {
+    padding: 1em;
+    cursor: pointer;
+    :hover {
+      color: blue;
+    }
+  }
+}
