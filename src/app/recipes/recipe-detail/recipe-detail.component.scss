@@ -10,7 +10,6 @@
     object-fit: cover;
   }
   .tag {
-    //margin-top: 2em;
     margin-left: 0.5em;
     &:hover {
       cursor: pointer;
@@ -27,5 +26,11 @@
   .categories-tags {
     margin-top: 0.3em;
     display: flex;
+  }
+
+  @media (max-width: 768px) {
+    .edit-delete-btns {
+      margin-top: 0.7em;
+    }
   }
 }
