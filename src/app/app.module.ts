@@ -26,6 +26,7 @@ import { RecipeDetailIngredientsComponent } from './recipes/recipe-detail/recipe
 import { RecipeDetailStepsComponent } from './recipes/recipe-detail/recipe-detail-steps/recipe-detail-steps.component';
 import { recipesReducer } from './recipes/store/recipes.reducer';
 import { RecipesEffects } from './recipes/store/recipes.effects';
+import { DeleteRecipeModalComponent } from './recipes/recipe-detail/delete-recipe-modal/delete-recipe-modal.component';
 
 @NgModule({
 	declarations: [
@@ -40,6 +41,7 @@ import { RecipesEffects } from './recipes/store/recipes.effects';
 		RecipeDetailComponent,
 		RecipeDetailIngredientsComponent,
 		RecipeDetailStepsComponent,
+		DeleteRecipeModalComponent,
 	],
 	imports: [
 		BrowserModule,

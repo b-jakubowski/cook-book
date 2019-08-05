@@ -8,11 +8,29 @@
             <p class="is-size-5"><fa-icon  [icon]="'weight-hanging'"></fa-icon> {{(selectedRecipe$ | async).kcal}} kcal</p>
             <p class="is-size-5"><fa-icon  [icon]="'carrot'"></fa-icon> {{(selectedRecipe$ | async).ingredients.length}} ingredients</p>
           </div>
+            <div class="categories-tags">
+              <p class="is-size-5 has-text-grey">Categories: </p>
+              <ng-container *ngFor="let category of (selectedRecipe$ | async).category">
+                <span class="tag is-primary is-medium is-hoverable">{{category}}</span>
+              </ng-container>
+            </div>
+
         </div>
         <div class="tags-container">
-          <ng-container *ngFor="let category of (selectedRecipe$ | async).category">
-            <span class="tag is-primary is-medium is-hoverable">{{category}}</span>
-          </ng-container>
+          <div class="edit-delete-btns">
+            <a class="button is-info is-outlined">
+              <span class="icon is-small">
+                <fa-icon [icon]="'edit'"></fa-icon>
+              </span>
+              <span>Edit</span>
+            </a>
+            <a class="button is-danger is-outlined" (click)="onDeleteBtnClick()">
+              <span>Delete</span>
+              <span class="icon is-small">
+                <fa-icon [icon]="'times'"></fa-icon>
+              </span>
+            </a>
+          </div>
         </div>
 			</div>
 			<div class="column">
@@ -39,3 +57,9 @@
 <ng-template #recipeSteps>
   <app-recipe-detail-steps [selectedRecipe$]="selectedRecipe$"></app-recipe-detail-steps>
 </ng-template>
+
+<app-delete-recipe-modal
+  [isModalActive]="isModalActive"
+  [activeRecipeId]="activatedRouteId"
+  (modalClosed)="isModalClosed($event)">
+</app-delete-recipe-modal>

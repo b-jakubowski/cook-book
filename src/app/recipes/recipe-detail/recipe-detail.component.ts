@@ -15,6 +15,7 @@ export class RecipeDetailComponent {
 	selectedRecipe$: Observable<Recipe> = this.store.select(state => state.recipes.entities[this.activatedRouteId]).pipe(filter(Boolean));
 	isIngredientsTabSelected = true;
 	isStepsTabSelected = false;
+	isModalActive = false;
 
 	constructor(private activatedRoute: ActivatedRoute, private store: Store<{ recipes: { entities: Recipe[] } }>) {}
 
@@ -26,5 +27,13 @@ export class RecipeDetailComponent {
 	onStepsTabClick() {
 		this.isIngredientsTabSelected = false;
 		this.isStepsTabSelected = true;
+	}
+
+	onDeleteBtnClick() {
+		this.isModalActive = true;
+	}
+
+	isModalClosed(closed: boolean) {
+		this.isModalActive = !closed;
 	}
 }

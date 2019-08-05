@@ -1,0 +1,14 @@
+<div class="modal" [ngClass]="{'is-active': isModalActive}">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Delete Recipe</p>
+      <button class="delete" aria-label="close" (click)="closeModal()"></button>
+    </header>
+    <section class="modal-card-body">
+      <p>Are You sure You want to delete this recipe?</p>
+      <button class="button is-danger" (click)="deleteRecipe()">Yes</button>
+      <button class="button" (click)="closeModal()">No</button>
+    </section>
+  </div>
+</div>
