@@ -1,6 +1,6 @@
 <div class="card">
   <div class="card-content">
-    <h1 class="title">Sign up</h1>
+    <h1 class="title">{{ isLoginMode ? 'Login' : 'Sign up'}}</h1>
     <div class="field">
       <p class="control has-icons-left has-icons-right">
         <input class="input" type="email" placeholder="Email">
@@ -24,7 +24,9 @@
     <div class="content">
       <div class="buttons">
         <a class="button is-primary">Sign up!</a>
-        <a class="button">Switch to Log in</a>
+        <a
+          class="button"
+          (click)="switchMode()">Switch to  {{ isLoginMode ? 'Sign up' : 'Login'}}</a>
       </div>
     </div>
   </div>
