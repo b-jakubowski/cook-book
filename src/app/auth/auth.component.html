@@ -23,7 +23,7 @@
 
     <div class="content">
       <div class="buttons">
-        <a class="button is-primary">Sign up!</a>
+        <a class="button is-primary">{{ isLoginMode ? 'Login' : 'Sign up!'}}</a>
         <a
           class="button"
           (click)="switchMode()">Switch to  {{ isLoginMode ? 'Sign up' : 'Login'}}</a>
