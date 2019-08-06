@@ -1,9 +1,15 @@
-<app-navbar></app-navbar>
-<section class="section columns is-fullheight">
-  <aside class="column is-narrow section is-hidden-touch">
+<app-navbar *ngIf="!isAuthPath"></app-navbar>
+<section
+  class="section columns is-fullheight"
+  [ngClass]="{'is-centered': isAuthPath}">
+  <aside
+    *ngIf="!isAuthPath"
+    class="column is-narrow section is-hidden-touch">
     <app-sidebar></app-sidebar>
   </aside>
-  <div class="container section column">
+  <div
+    class="column"
+    [ngClass]="{'is-6': isAuthPath}">
     <router-outlet></router-outlet>
   </div>
 </section>

@@ -18,7 +18,9 @@ import {
 	faTrashAlt,
 	faCheck,
 	faTimes,
-	faArrowCircleLeft
+	faArrowCircleLeft,
+	faEnvelope,
+	faLock
 } from '@fortawesome/free-solid-svg-icons';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -53,7 +55,9 @@ export class CoreModule {
 			faTrashAlt,
 			faCheck,
 			faTimes,
-			faArrowCircleLeft
+			faArrowCircleLeft,
+			faEnvelope,
+			faLock
 		);
 	}
 }
