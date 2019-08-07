@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { EffectsModule } from '@ngrx/effects';
@@ -61,6 +61,7 @@ import { AuthComponent } from './auth/auth.component';
 			recipes: recipesReducer
 		}),
 		StoreDevtoolsModule.instrument({logOnly: environment.production}),
+		FormsModule,
 	],
 	providers: [],
 	bootstrap: [AppComponent]
