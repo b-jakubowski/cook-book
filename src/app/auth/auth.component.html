@@ -1,6 +1,8 @@
-<div class="card">
+<div *ngIf="isLoading" class="card-content columns is-centered">
+  <app-loading-spinner></app-loading-spinner>
+</div>
+<div class="card" *ngIf="!isLoading">
   <form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)" class="card-content">
-    <div></div>
       <h1 class="title">{{ isLoginMode ? 'Login' : 'Sign up'}}</h1>
       <div class="field">
         <p class="control has-icons-left has-icons-right">
@@ -54,5 +56,9 @@
         </button>
       </div>
     </form>
+</div>
 
+<div class="notification is-danger" *ngIf="error">
+  <button class="delete" (click)="hideError()"></button>
+  {{error}}
 </div>
