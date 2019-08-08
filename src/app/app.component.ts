@@ -28,7 +28,7 @@ export class AppComponent implements OnInit {
 					return;
 				}
 
-				if (event.url.includes('/auth')) {
+				if (event.url.includes('/auth') || event.url === '/') {
 					this.isAuthPath = true;
 				} else {
 					this.isAuthPath = false;

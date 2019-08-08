@@ -9,7 +9,8 @@ import { RecipesComponent } from './recipes/recipes.component';
 import { AuthComponent } from './auth/auth.component';
 
 const appRoutes: Routes = [
-	{ path: '', redirectTo: 'recipes', pathMatch: 'full' },
+	{ path: '', redirectTo: 'auth', pathMatch: 'full' },
+	{ path: 'auth', component: AuthComponent },
 	{ path: 'recipes', component: RecipesComponent, children: [
 		{
 			path: '',
@@ -27,7 +28,6 @@ const appRoutes: Routes = [
 	]},
 	{ path: 'edit-recipe', component: EditRecipeComponent },
 	{ path: 'shopping-list', component: ShoppingListComponent },
-	{ path: 'auth', component: AuthComponent }
 ];
 
 @NgModule({
