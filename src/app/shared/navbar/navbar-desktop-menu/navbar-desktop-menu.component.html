@@ -1,12 +1,9 @@
-<div class="navbar-item is-hidden-mobile">
+<!--<div class="navbar-item is-hidden-mobile">
 	<input class="input" type="text" placeholder="Search">
-</div>
+</div>-->
 <div class="navbar-item">
 	<div class="buttons">
-		<a class="button">
-			<span class="icon"><fa-icon [icon]="'user'"></fa-icon></span>
-		</a>
-		<a class="button" routerLink="/auth">
+		<a class="button" (click)="signOut()">
 			<span class="icon"><fa-icon [icon]="'sign-out-alt'"></fa-icon></span>
 		</a>
 	</div>
