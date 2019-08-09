@@ -22,8 +22,7 @@ export class AuthService {
 
 	login(email: string, password: string): Observable<UserCredential> {
 		return from(this.afAuth.auth.signInWithEmailAndPassword(email, password)).pipe(
-			tap(() => console.log(this.afAuth.auth.currentUser)),
-			catchError(errorRes => this.handleError(errorRes)),
+			catchError(errorRes => this.handleError(errorRes))
 		);
 
 	}
