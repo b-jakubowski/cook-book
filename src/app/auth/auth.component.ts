@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuthService } from './auth.service';
 import { Observable } from 'rxjs';
-import { AuthResponse } from './auth-response.interface';
 import { Router } from '@angular/router';
+import UserCredential = firebase.auth.UserCredential;
 
 @Component({
 	selector: 'app-auth',
@@ -33,7 +33,7 @@ export class AuthComponent {
 		const password = form.value.password;
 		this.isLoading = true;
 
-		let authObs: Observable<AuthResponse>;
+		let authObs: Observable<UserCredential>;
 
 		if (this.isLoginMode) {
 			authObs = this.authService.login(email, password);
