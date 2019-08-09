@@ -3,6 +3,7 @@ import { Recipe } from '../../app/recipes/recipe.interface';
 export const recipes: Recipe[] = [
 	{
 		name: 'Burger wołowy',
+		userId: '1',
 		category: ['obiad', 'fastfood'],
 		description: [
 			'Wołowinę razem z łojem zmielić na grubych oczkach maszyny do mielenia mięsa.',
@@ -45,6 +46,7 @@ export const recipes: Recipe[] = [
 	},
 	{
 		name: 'Kasza jęczmienna pęczak z ciecierzycą w sosie pomidorowym',
+		userId: '1',
 		category: ['obiad', 'no-meat'],
 		description: [
 			'Ugotuj kaszę zgodnie z przepisem na opakowaniu.',
