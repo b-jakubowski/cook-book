@@ -42,7 +42,7 @@
 		</div>
 	</div>
 	<nav class="panel">
-		<a class="panel-block category-panel" *ngFor="let category of recipeForm.get('categories').controls; let i = index;">
+		<a class="panel-block category-panel" *ngFor="let category of recipeForm.get('categories')['controls']; let i = index;">
 			<div class="column">{{ category.value.name }}</div>
 			<div class="column is-narrow is-narrow-mobile">
 				<span class="icon delete-icon" (click)="deleteCategory(i)">
@@ -67,7 +67,7 @@
 		</div>
 	</div>
   <nav class="panel">
-    <a class="panel-block step-panel" *ngFor="let step of recipeForm.get('steps').controls; let i = index;">
+    <a class="panel-block step-panel" *ngFor="let step of recipeForm.get('steps')['controls']; let i = index;">
       <app-edit-recipe-step
         [recipeStep]="step"
         [recipeStepIndex]="i"
@@ -98,7 +98,7 @@
 	</div>
 
 	<nav class="panel">
-		<a class="panel-block ingredient-panel" *ngFor="let ingredient of recipeForm.get('ingredients').controls; let i = index;">
+		<a class="panel-block ingredient-panel" *ngFor="let ingredient of recipeForm.get('ingredients')['controls']; let i = index;">
 			<div class="column">{{ ingredient.value.name }}</div>
 			<div class="column is-narrow is-narrow-mobile">{{ ingredient.value.amount }}</div>
 			<div class="column is-narrow is-narrow-mobile">
