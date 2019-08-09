@@ -1,4 +1,4 @@
-const environment = {
+const environmentExample = {
 	production: false,
 	firebase: {
 		apiKey: '',

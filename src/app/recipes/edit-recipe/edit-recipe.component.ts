@@ -3,6 +3,7 @@ import {FormArray, FormBuilder, FormControl, Validators} from '@angular/forms';
 import {RecipesService} from '../recipes.service';
 import {Recipe} from '../recipe.interface';
 import {Router} from '@angular/router';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
 	selector: 'app-edit-recipe',
@@ -30,7 +31,8 @@ export class EditRecipeComponent {
 	constructor(
 		private formBuilder: FormBuilder,
 		private recipeService: RecipesService,
-		private router: Router
+		private router: Router,
+		private afAuth: AngularFireAuth
 	) {}
 
 	onSubmit() {
@@ -43,6 +45,7 @@ export class EditRecipeComponent {
 				time: this.recipeForm.value.time,
 				kcal: this.recipeForm.value.kcal ? this.recipeForm.value.kcal : null,
 				imagePath: this.recipeForm.value.imagePath ? this.recipeForm.value.imagePath : '',
+				userId: this.afAuth.auth.currentUser.uid
 			};
 
 			this.recipeForm.value.categories.forEach(category => recipeFormVals.category.push(category.name));

@@ -8,4 +8,5 @@ export interface Recipe {
 	time: string;
 	kcal?: number;
 	imagePath: string;
+	userId: string;
 }

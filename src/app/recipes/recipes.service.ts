@@ -4,26 +4,31 @@ import {Observable} from 'rxjs';
 import {AngularFirestore, AngularFirestoreCollection} from '@angular/fire/firestore';
 import {Recipe} from './recipe.interface';
 import {map} from 'rxjs/operators';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Injectable({
 	providedIn: 'root'
 })
 export class RecipesService {
-	recipeCollection: AngularFirestoreCollection<Recipe>;
 	recipes: Observable<Recipe[]>;
 
 	constructor(
 		private http: HttpClient,
-		private firestore: AngularFirestore) {
-		this.recipeCollection = this.firestore.collection<Recipe>('recipes');
-	}
+		private firestore: AngularFirestore,
+		private afAuth: AngularFireAuth) {}
 
 	fetchRecipesFromMock(): Observable<any> {
 		return this.http.get('/assets/mocks/recipes-mock.json');
 	}
 
+	get recipesCollection(): AngularFirestoreCollection<Recipe> {
+		return this.firestore.collection<Recipe>(
+			'recipes', ref => ref.where('userId', '==', this.afAuth.auth.currentUser.uid)
+		);
+	}
+
 	getRecipes() {
-		this.recipes = this.recipeCollection.snapshotChanges().pipe(
+		this.recipes = this.recipesCollection.snapshotChanges().pipe(
 			map(actions => actions.map(a => {
 				const data = a.payload.doc.data();
 				const id = a.payload.doc.id;
@@ -35,7 +40,7 @@ export class RecipesService {
 	}
 
 	addRecipe(recipe: Recipe) {
-		this.recipeCollection.add({
+		this.recipesCollection.add({
 			name: recipe.name,
 			category: recipe.category,
 			description: recipe.description,
@@ -43,11 +48,12 @@ export class RecipesService {
 			time: recipe.time,
 			kcal: recipe.kcal ? recipe.kcal : null,
 			imagePath: recipe.imagePath ? recipe.imagePath : '',
+			userId: recipe.userId
 		});
 	}
 
 	deleteRecipe(id: string) {
-		this.recipeCollection.doc(id).delete()
+		this.recipesCollection.doc(id).delete()
 			.then(() => {
 				console.log('Recipe successfully deleted!');
 			})

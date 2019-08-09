@@ -6,13 +6,15 @@ import { NavbarDesktopMenuComponent } from './navbar/navbar-desktop-menu/navbar-
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { RouterModule } from '@angular/router';
 import { ConfirmationModalComponent } from './confirmation-modal/confirmation-modal.component';
+import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
 
 const components = [
 	NavbarComponent,
 	NavbarMobileMenuComponent,
 	NavbarDesktopMenuComponent,
 	SidebarComponent,
-	ConfirmationModalComponent
+	ConfirmationModalComponent,
+	LoadingSpinnerComponent
 ];
 
 @NgModule({

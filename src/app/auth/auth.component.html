@@ -1,0 +1,66 @@
+<div *ngIf="isLoading" class="card-content columns is-centered">
+  <app-loading-spinner></app-loading-spinner>
+</div>
+<div class="card" *ngIf="!isLoading">
+  <form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)" class="card-content">
+      <h1 class="title">{{ isLoginMode ? 'Login' : 'Sign up'}}</h1>
+      <div class="field">
+        <p class="control has-icons-left has-icons-right">
+          <input
+            type="email"
+            id="email"
+            name="email"
+            autocomplete="email"
+            class="input form-control"
+            placeholder="Email"
+            ngModel
+            required
+            email>
+          <span class="icon is-small is-left">
+            <fa-icon [icon]="'envelope'"></fa-icon>
+         </span>
+        <span class="icon is-small is-right">
+          <fa-icon [icon]="'check'"></fa-icon>
+        </span>
+        </p>
+      </div>
+      <div class="field">
+        <p class="control has-icons-left">
+          <input
+            type="password"
+            id="password"
+            name="password"
+            autocomplete="password"
+            class="input"
+            placeholder="Password"
+            ngModel
+            required
+            minlength="6"
+          >
+          <span class="icon is-small is-left">
+            <fa-icon [icon]="'lock'"></fa-icon>
+          </span>
+        </p>
+      </div>
+      <div class="buttons">
+        <button
+          type="submit"
+          class="button is-primary"
+          [disabled]="!authForm.valid"
+        >
+          {{ isLoginMode ? 'Login' : 'Sign Up' }}
+        </button>
+        <button
+          class="button"
+          type="button"
+          (click)="switchMode()">
+          Switch to  {{ isLoginMode ? 'Sign up' : 'Login'}}
+        </button>
+      </div>
+    </form>
+</div>
+
+<div class="notification is-danger" *ngIf="error">
+  <button class="delete" (click)="hideError()"></button>
+  {{error}}
+</div>

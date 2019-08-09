@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { EffectsModule } from '@ngrx/effects';
@@ -28,6 +28,9 @@ import { recipesReducer } from './recipes/store/recipes.reducer';
 import { RecipesEffects } from './recipes/store/recipes.effects';
 import { DeleteRecipeModalComponent } from './recipes/recipe-detail/delete-recipe-modal/delete-recipe-modal.component';
 import { EditRecipeStepComponent } from './recipes/edit-recipe/edit-recipe-step/edit-recipe-step.component';
+import { AuthComponent } from './auth/auth.component';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireAuthGuardModule } from '@angular/fire/auth-guard';
 
 @NgModule({
 	declarations: [
@@ -44,6 +47,7 @@ import { EditRecipeStepComponent } from './recipes/edit-recipe/edit-recipe-step/
 		RecipeDetailStepsComponent,
 		DeleteRecipeModalComponent,
 		EditRecipeStepComponent,
+		AuthComponent,
 	],
 	imports: [
 		BrowserModule,
@@ -53,12 +57,15 @@ import { EditRecipeStepComponent } from './recipes/edit-recipe/edit-recipe-step/
 		ReactiveFormsModule,
 		AngularFireModule.initializeApp(environment.firebase, 'cookbook'),
 		AngularFirestoreModule,
+		AngularFireAuthModule,
+		AngularFireAuthGuardModule,
 		EffectsModule.forRoot([ShoppingListEffects, RecipesEffects]),
 		StoreModule.forRoot({
 			shoppingList: shoppingListReducer,
 			recipes: recipesReducer
 		}),
 		StoreDevtoolsModule.instrument({logOnly: environment.production}),
+		FormsModule,
 	],
 	providers: [],
 	bootstrap: [AppComponent]
