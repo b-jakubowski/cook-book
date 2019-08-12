@@ -4,6 +4,8 @@ import {Observable} from 'rxjs';
 import { Store } from '@ngrx/store';
 import { Recipe } from '../recipe.interface';
 import {filter} from 'rxjs/operators';
+import { ShoppingListService } from '../../shopping-list/shopping-list.service';
+import { Ingredient } from '../ingredient.interface';
 
 @Component({
 	selector: 'app-recipe-detail',
@@ -20,7 +22,8 @@ export class RecipeDetailComponent {
 	constructor(
 		private activatedRoute: ActivatedRoute,
 		private store: Store<{ recipes: { entities: Recipe[] } }>,
-		private router: Router
+		private router: Router,
+		private shoppingListService: ShoppingListService
 	) {}
 
 	onIngredientsTabClick() {
@@ -43,5 +46,14 @@ export class RecipeDetailComponent {
 
 	backToRecipeList() {
 		this.router.navigate(['/recipes']);
+	}
+
+	addIngredientsToShoppingList() {
+		this.selectedRecipe$.subscribe((recipe: Recipe) => {
+			recipe.ingredients.forEach((ingredient: Ingredient) => this.shoppingListService.addIngredient({
+				name: ingredient.name,
+				amount: ingredient.amount
+			}));
+		});
 	}
 }
