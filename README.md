@@ -1,6 +1,13 @@
 # CookBook
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.3.
+## Test account
+
+You can either signup the new account and manage Your recipes or You can login to created test account:
+```
+email: john@gmail.com
+pass: 123456
+```
 
 ## Development server
 

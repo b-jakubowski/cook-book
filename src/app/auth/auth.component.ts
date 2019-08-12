@@ -11,7 +11,7 @@ import UserCredential = firebase.auth.UserCredential;
 	styleUrls: ['./auth.component.scss']
 })
 export class AuthComponent {
-	isLoginMode = false;
+	isLoginMode = true;
 	isLoading = false;
 	error: string = null;
 
