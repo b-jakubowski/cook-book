@@ -3,12 +3,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 import {Observable} from 'rxjs';
 import { Store } from '@ngrx/store';
 import { Recipe } from '../recipe.interface';
-import {filter} from 'rxjs/operators';
+import {filter, catchError, take} from 'rxjs/operators';
+import { ShoppingListService } from '../../shopping-list/shopping-list.service';
+import { Ingredient } from '../ingredient.interface';
 
 @Component({
 	selector: 'app-recipe-detail',
 	templateUrl: './recipe-detail.component.html',
-	styleUrls: ['./recipe-detail.component.scss']
+	styleUrls: ['./recipe-detail.component.scss'],
 })
 export class RecipeDetailComponent {
 	activatedRouteId: string = this.activatedRoute.snapshot.params.id;
@@ -16,11 +18,14 @@ export class RecipeDetailComponent {
 	isIngredientsTabSelected = true;
 	isStepsTabSelected = false;
 	isModalActive = false;
+	ingrAddedModalVisible = false;
+	error = null;
 
 	constructor(
 		private activatedRoute: ActivatedRoute,
 		private store: Store<{ recipes: { entities: Recipe[] } }>,
-		private router: Router
+		private router: Router,
+		private shoppingListService: ShoppingListService
 	) {}
 
 	onIngredientsTabClick() {
@@ -43,5 +48,33 @@ export class RecipeDetailComponent {
 
 	backToRecipeList() {
 		this.router.navigate(['/recipes']);
+	}
+
+	addIngredientsToShoppingList() {
+		this.selectedRecipe$.pipe(
+			take(1),
+			catchError(error => this.error = error)
+			).subscribe((recipe: Recipe) => {
+				recipe.ingredients.forEach((ingredient: Ingredient) => {
+					this.shoppingListService.addIngredient({
+						name: ingredient.name,
+						amount: ingredient.amount
+					});
+					this.toggleIngrAddedModal();
+				});
+			});
+	}
+
+	toggleIngrAddedModal() {
+		this.ingrAddedModalVisible = true;
+		setTimeout(() => this.ingrAddedModalVisible = false, 3000);
+	}
+
+	hideModal() {
+		this.ingrAddedModalVisible = false;
+	}
+
+	hideError() {
+		this.error = null;
 	}
 }

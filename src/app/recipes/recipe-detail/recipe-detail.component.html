@@ -60,6 +60,22 @@
 
 <ng-container *ngIf="isIngredientsTabSelected; else recipeSteps">
   <app-recipe-detail-ingredients [selectedRecipe$]="selectedRecipe$"></app-recipe-detail-ingredients>
+  <button class="button ingredients-btn is-primary" (click)="addIngredientsToShoppingList()">
+    <span>Add ingredients to Shopping List</span>
+    <span class="icon is-small">
+      <fa-icon [icon]="'plus-circle'"></fa-icon>
+    </span>
+	</button>
+	
+  <div class="notification is-success" *ngIf="ingrAddedModalVisible">
+    <button class="delete" (click)="hideModal()"></button>
+    Ingredients added to Shopping List !
+  </div>
+  <div class="notification is-warning" *ngIf="error">
+    <button class="delete" (click)="hideError()"></button>
+    Something wrong happened :(
+	</div>
+	
 </ng-container>
 <ng-template #recipeSteps>
   <app-recipe-detail-steps [selectedRecipe$]="selectedRecipe$"></app-recipe-detail-steps>
