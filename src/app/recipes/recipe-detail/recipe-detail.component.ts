@@ -69,4 +69,12 @@ export class RecipeDetailComponent {
 		this.ingrAddedModalVisible = true;
 		setTimeout(() => this.ingrAddedModalVisible = false, 3000);
 	}
+
+	hideModal() {
+		this.ingrAddedModalVisible = false;
+	}
+
+	hideError() {
+		this.error = null;
+	}
 }
