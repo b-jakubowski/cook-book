@@ -1,44 +1,44 @@
 <ng-container *ngIf="(selectedRecipe$ | async)">
-  <a class="button back-btn is-light" (click)="backToRecipeList()">
-    <span class="icon is-small">
-      <fa-icon [icon]="'arrow-circle-left'"></fa-icon>
-    </span>
-    <span>Back</span>
-  </a>
+	<a class="button back-btn is-light" (click)="backToRecipeList()">
+		<span class="icon is-small">
+			<fa-icon [icon]="'arrow-circle-left'"></fa-icon>
+		</span>
+		<span>Back</span>
+	</a>
 
 		<div class="columns">
 			<div class="column recipe-info">
-        <div>
-          <h2 class="title is-3">{{(selectedRecipe$ | async).name}}</h2>
-          <div class="has-text-grey">
-            <p class="is-size-5"><fa-icon  [icon]="'clock'"></fa-icon> {{(selectedRecipe$ | async).time}}</p>
-            <p class="is-size-5"><fa-icon  [icon]="'weight-hanging'"></fa-icon> {{(selectedRecipe$ | async).kcal}} kcal</p>
-            <p class="is-size-5"><fa-icon  [icon]="'carrot'"></fa-icon> {{(selectedRecipe$ | async).ingredients.length}} ingredients</p>
-          </div>
-            <div class="categories-tags">
-              <p class="is-size-5 has-text-grey">Categories: </p>
-              <ng-container *ngFor="let category of (selectedRecipe$ | async).category">
-                <span class="tag is-primary is-medium is-hoverable">{{category}}</span>
-              </ng-container>
-            </div>
+				<div>
+					<h2 class="title is-3">{{(selectedRecipe$ | async).name}}</h2>
+					<div class="has-text-grey">
+						<p class="is-size-5"><fa-icon  [icon]="'clock'"></fa-icon> {{(selectedRecipe$ | async).time}}</p>
+						<p class="is-size-5"><fa-icon  [icon]="'weight-hanging'"></fa-icon> {{(selectedRecipe$ | async).kcal}} kcal</p>
+						<p class="is-size-5"><fa-icon  [icon]="'carrot'"></fa-icon> {{(selectedRecipe$ | async).ingredients.length}} ingredients</p>
+					</div>
+						<div class="categories-tags">
+							<p class="is-size-5 has-text-grey">Categories: </p>
+							<ng-container *ngFor="let category of (selectedRecipe$ | async).category">
+								<span class="tag is-primary is-medium is-hoverable">{{category}}</span>
+							</ng-container>
+						</div>
 
-        </div>
-        <div class="tags-container">
-          <div class="edit-delete-btns">
-            <a class="button is-info is-outlined">
-              <span class="icon is-small">
-                <fa-icon [icon]="'edit'"></fa-icon>
-              </span>
-              <span>Edit</span>
-            </a>
-            <a class="button is-danger is-outlined" (click)="onDeleteBtnClick()">
-              <span>Delete</span>
-              <span class="icon is-small">
-                <fa-icon [icon]="'times'"></fa-icon>
-              </span>
-            </a>
-          </div>
-        </div>
+				</div>
+				<div class="tags-container">
+					<div class="edit-delete-btns">
+						<a class="button is-info is-outlined">
+							<span class="icon is-small">
+								<fa-icon [icon]="'edit'"></fa-icon>
+							</span>
+							<span>Edit</span>
+						</a>
+						<a class="button is-danger is-outlined" (click)="onDeleteBtnClick()">
+							<span>Delete</span>
+							<span class="icon is-small">
+								<fa-icon [icon]="'times'"></fa-icon>
+							</span>
+						</a>
+					</div>
+				</div>
 			</div>
 			<div class="column">
 					<img [src]="(selectedRecipe$ | async).imagePath" alt="recipe image">
@@ -48,41 +48,38 @@
 </ng-container>
 
 <div class="tabs is-centered is-medium">
-  <ul>
-    <li [ngClass]="{'is-active': isIngredientsTabSelected}">
-      <a (click)="onIngredientsTabClick()">Ingredients</a>
-    </li>
-    <li [ngClass]="{'is-active': isStepsTabSelected}">
-      <a (click)="onStepsTabClick()">Steps</a>
-    </li>
-  </ul>
+	<ul>
+		<li [ngClass]="{'is-active': isIngredientsTabSelected}">
+			<a (click)="onIngredientsTabClick()">Ingredients</a>
+		</li>
+		<li [ngClass]="{'is-active': isStepsTabSelected}">
+			<a (click)="onStepsTabClick()">Steps</a>
+		</li>
+	</ul>
 </div>
 
 <ng-container *ngIf="isIngredientsTabSelected; else recipeSteps">
-  <app-recipe-detail-ingredients [selectedRecipe$]="selectedRecipe$"></app-recipe-detail-ingredients>
-  <button class="button ingredients-btn is-primary" (click)="addIngredientsToShoppingList()">
-    <span>Add ingredients to Shopping List</span>
-    <span class="icon is-small">
-      <fa-icon [icon]="'plus-circle'"></fa-icon>
-    </span>
+	<app-recipe-detail-ingredients [selectedRecipe$]="selectedRecipe$"></app-recipe-detail-ingredients>
+	<button class="button ingredients-btn is-primary" (click)="addIngredientsToShoppingList()">
+		<span>Add ingredients to Shopping List</span>
+		<span class="icon is-small">
+			<fa-icon [icon]="'plus-circle'"></fa-icon>
+		</span>
 	</button>
-	
-  <div class="notification is-success" *ngIf="ingrAddedModalVisible">
-    <button class="delete" (click)="hideModal()"></button>
-    Ingredients added to Shopping List !
-  </div>
-  <div class="notification is-warning" *ngIf="error">
-    <button class="delete" (click)="hideError()"></button>
-    Something wrong happened :(
-	</div>
+
+	<app-confirm-notification
+		[notificationMessage]="'Ingredients added to Shopping List !'"
+		[openNotification]="ingrAddedModalVisible"
+		[error]="error">
+	</app-confirm-notification>
 	
 </ng-container>
 <ng-template #recipeSteps>
-  <app-recipe-detail-steps [selectedRecipe$]="selectedRecipe$"></app-recipe-detail-steps>
+	<app-recipe-detail-steps [selectedRecipe$]="selectedRecipe$"></app-recipe-detail-steps>
 </ng-template>
 
 <app-delete-recipe-modal
-  [isModalActive]="isModalActive"
-  [activeRecipeId]="activatedRouteId"
-  (modalClosed)="isModalClosed($event)">
+	[isModalActive]="isModalActive"
+	[activeRecipeId]="activatedRouteId"
+	(modalClosed)="isModalClosed($event)">
 </app-delete-recipe-modal>
