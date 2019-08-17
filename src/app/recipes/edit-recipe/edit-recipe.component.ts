@@ -27,6 +27,8 @@ export class EditRecipeComponent {
 	stepInputVal = '';
 	ingrNameInputVal = '';
 	ingrAmountInputVal = '';
+	ingrAddedModalVisible = false;
+	error = null;
 
 	constructor(
 		private formBuilder: FormBuilder,
@@ -53,8 +55,14 @@ export class EditRecipeComponent {
 
 			this.recipeService.addRecipe(recipeFormVals);
 
-			this.router.navigate(['/recipes']);
+			this.openNotification();
+
+			setTimeout(() => this.router.navigate(['/recipes']), 2000 );
 		}
+	}
+
+	openNotification() {
+		this.ingrAddedModalVisible = true;
 	}
 
 	pushToFormArray(arr: FormArray, value: string) {
@@ -126,4 +134,5 @@ export class EditRecipeComponent {
 	onIngrAmountKey(event: any) {
 		this.ingrAmountInputVal = event.target.value;
 	}
+
 }

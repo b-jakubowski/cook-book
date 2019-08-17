@@ -111,3 +111,9 @@
 </form>
 
 <a class="button is-success is-medium" [attr.disabled]="!recipeForm.valid ? '' : null" (click)="onSubmit()">Submit Recipe!</a>
+
+<app-confirm-notification
+	[notificationMessage]="'Recipe successfully added !'"
+	[openNotification]="ingrAddedModalVisible"
+	[error]="error">
+</app-confirm-notification>
