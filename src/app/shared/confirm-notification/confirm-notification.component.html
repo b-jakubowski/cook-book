@@ -1,0 +1,8 @@
+<div class="notification is-success" *ngIf="openNotification">
+	<button class="delete" (click)="hideNotification()"></button>
+	{{ notificationMessage }}
+</div>
+<div class="notification is-warning" *ngIf="error">
+	<button class="delete" (click)="hideError()"></button>
+	Something wrong happened :(
+</div>

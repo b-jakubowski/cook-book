@@ -5,7 +5,7 @@ import { NavbarMobileMenuComponent } from './navbar/navbar-mobile-menu/navbar-mo
 import { NavbarDesktopMenuComponent } from './navbar/navbar-desktop-menu/navbar-desktop-menu.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { RouterModule } from '@angular/router';
-import { ConfirmationModalComponent } from './confirmation-modal/confirmation-modal.component';
+import { ConfirmNotificationComponent } from './confirm-notification/confirm-notification.component';
 import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
 
 const components = [
@@ -13,7 +13,7 @@ const components = [
 	NavbarMobileMenuComponent,
 	NavbarDesktopMenuComponent,
 	SidebarComponent,
-	ConfirmationModalComponent,
+	ConfirmNotificationComponent,
 	LoadingSpinnerComponent
 ];
 
