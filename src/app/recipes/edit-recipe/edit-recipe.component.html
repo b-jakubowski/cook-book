@@ -43,7 +43,7 @@
 	</div>
 	<nav class="panel">
 		<a class="panel-block category-panel" *ngFor="let category of recipeForm.get('categories')['controls']; let i = index;">
-			<div class="column">{{ category.value.name }}</div>
+			<div class="column">{{ category.value }}</div>
 			<div class="column is-narrow is-narrow-mobile">
 				<span class="icon delete-icon" (click)="deleteCategory(i)">
 					<fa-icon [icon]="'trash-alt'"></fa-icon>
