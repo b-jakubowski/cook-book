@@ -5,8 +5,8 @@ import { Recipe } from '../recipe.interface';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { filter, take } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { catchError, filter, take } from 'rxjs/operators';
 
 @Component({
 	selector: 'app-edit-recipe',
@@ -87,7 +87,14 @@ export class EditRecipeComponent implements OnInit {
 
 	fillEditedRecipeForm() {
 		const editedRecipe$: Observable<Recipe> = this.store.select(state => state.recipes.entities[this.activatedRouteId]).pipe(filter(Boolean));
-		editedRecipe$.pipe(take(1)).subscribe((recipe: Recipe) => {
+
+		editedRecipe$.pipe(
+			take(1),
+			catchError(error => {
+				console.log(error);
+				return of({ result: null });
+			})
+		).subscribe((recipe: Recipe) => {
 			this.recipeForm.controls.name.setValue(recipe.name);
 			this.recipeForm.controls.kcal.setValue(recipe.kcal);
 			this.recipeForm.controls.time.setValue(recipe.time);
