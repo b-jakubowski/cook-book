@@ -1,16 +1,21 @@
-import {Component} from '@angular/core';
-import {FormArray, FormBuilder, FormControl, Validators} from '@angular/forms';
-import {RecipesService} from '../recipes.service';
-import {Recipe} from '../recipe.interface';
-import {Router} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { FormArray, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { RecipesService } from '../recipes.service';
+import { Recipe } from '../recipe.interface';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { filter, take } from 'rxjs/operators';
 
 @Component({
 	selector: 'app-edit-recipe',
 	templateUrl: './edit-recipe.component.html',
 	styleUrls: ['./edit-recipe.component.scss']
 })
-export class EditRecipeComponent {
+export class EditRecipeComponent implements OnInit {
+	isEditMode = false;
+	activatedRouteId: string = this.activatedRoute.snapshot.params.id;
 	recipeForm = this.formBuilder.group({
 		name: new FormControl('', Validators.required),
 		time: new FormControl('', Validators.required),
@@ -20,9 +25,6 @@ export class EditRecipeComponent {
 		steps: this.formBuilder.array([], Validators.required),
 		ingredients: this.formBuilder.array([], Validators.required)
 	});
-	categories: FormArray;
-	steps: FormArray;
-	ingredients: FormArray;
 	categoryInputVal = '';
 	stepInputVal = '';
 	ingrNameInputVal = '';
@@ -34,72 +36,88 @@ export class EditRecipeComponent {
 		private formBuilder: FormBuilder,
 		private recipeService: RecipesService,
 		private router: Router,
-		private afAuth: AngularFireAuth
+		private activatedRoute: ActivatedRoute,
+		private afAuth: AngularFireAuth,
+		private store: Store<{ recipes: { entities: Recipe[] } }>
 	) {}
 
-	onSubmit() {
+	ngOnInit(): void {
+		this.isEditMode = this.router.url.includes('edit');
+		if (this.isEditMode) {
+			this.fillEditedRecipeForm();
+		}
+	}
+
+	onSubmit(): void {
 		if (this.recipeForm.valid) {
 			const recipeFormVals: Recipe = {
+				id: this.activatedRouteId,
 				name: this.recipeForm.value.name,
-				category: [],
-				description: [],
-				ingredients: this.recipeForm.value.ingredients,
+				category: this.recipeCategories.value,
+				description: this.recipeSteps.value,
+				ingredients: this.recipeIngredients.value,
 				time: this.recipeForm.value.time,
 				kcal: this.recipeForm.value.kcal ? this.recipeForm.value.kcal : null,
 				imagePath: this.recipeForm.value.imagePath ? this.recipeForm.value.imagePath : '',
 				userId: this.afAuth.auth.currentUser.uid
 			};
 
-			this.recipeForm.value.categories.forEach(category => recipeFormVals.category.push(category.name));
-			this.recipeForm.value.steps.forEach(step => recipeFormVals.description.push(step.name));
-
-			this.recipeService.addRecipe(recipeFormVals);
+			if (!this.isEditMode) {
+				this.recipeService.addRecipe(recipeFormVals);
+			} else {
+				this.recipeService.editRecipe(recipeFormVals);
+			}
 
 			this.openNotification();
-
-			setTimeout(() => this.router.navigate(['/recipes']), 2000 );
+			setTimeout(() => this.router.navigate(['/recipes']), 1000 );
 		}
+	}
+
+	get recipeCategories() {
+		return this.recipeForm.get('categories') as FormArray;
+	}
+
+	get recipeSteps() {
+		return this.recipeForm.get('steps') as FormArray;
+	}
+
+	get recipeIngredients() {
+		return this.recipeForm.get('ingredients') as FormArray;
+	}
+
+	fillEditedRecipeForm() {
+		const editedRecipe$: Observable<Recipe> = this.store.select(state => state.recipes.entities[this.activatedRouteId]).pipe(filter(Boolean));
+		editedRecipe$.pipe(take(1)).subscribe((recipe: Recipe) => {
+			this.recipeForm.controls.name.setValue(recipe.name);
+			this.recipeForm.controls.kcal.setValue(recipe.kcal);
+			this.recipeForm.controls.time.setValue(recipe.time);
+			this.recipeForm.controls.imagePath.setValue(recipe.imagePath);
+
+			recipe.category.forEach(cat => this.recipeCategories.push(this.formBuilder.control(cat)));
+			recipe.description.forEach(step => this.recipeSteps.push(this.formBuilder.control(step)));
+			recipe.ingredients.forEach(ingr => this.recipeIngredients.push(this.formBuilder.control(ingr)));
+		});
 	}
 
 	openNotification() {
 		this.ingrAddedModalVisible = true;
 	}
 
-	pushToFormArray(arr: FormArray, value: string) {
-		arr.push(
-			this.formBuilder.group({
-				name: value
-			})
-		);
-	}
-
-	createIngredient(nameVal, amountVal) {
-		this.ingredients.push(
-			this.formBuilder.group({
-				name: nameVal,
-				amount: amountVal
-			})
-		);
-	}
-
 	addCategory(value: string): void {
-		this.categories = this.recipeForm.get('categories') as FormArray;
 		if (value.length) {
-			this.pushToFormArray(this.categories, value);
+			this.recipeCategories.push(this.formBuilder.control(value));
 			this.categoryInputVal = '';
 		}
 	}
 
 	addStep(value: string): void {
-		this.steps = this.recipeForm.get('steps') as FormArray;
 		if (value.length) {
-			this.pushToFormArray(this.steps, value);
+			this.recipeSteps.push(this.formBuilder.control(value));
 			this.stepInputVal = '';
 		}
 	}
 
 	addIngredient(value: string, amount: string): void {
-		this.ingredients = this.recipeForm.get('ingredients') as FormArray;
 		if (value.length && amount.length) {
 			this.createIngredient(value, amount);
 			this.ingrNameInputVal = '';
@@ -107,16 +125,23 @@ export class EditRecipeComponent {
 		}
 	}
 
+	createIngredient(nameVal, amountVal) {
+		this.recipeIngredients.push(this.formBuilder.control({
+			name: nameVal,
+			amount: amountVal
+		}));
+	}
+
 	deleteCategory(key: number): void {
-		this.categories.removeAt(key);
+		this.recipeCategories.removeAt(key);
 	}
 
 	deleteStep(key: number): void {
-		this.steps.removeAt(key);
+		this.recipeSteps.removeAt(key);
 	}
 
 	deleteIngredient(key: number): void {
-		this.ingredients.removeAt(key);
+		this.recipeIngredients.removeAt(key);
 	}
 
 	onCategoryKey(event: any) {

@@ -20,7 +20,7 @@ export class EditRecipeStepComponent {
 	}
 
 	updateStepName() {
-		this.recipeStep.value.name = this.editedStep.value.stepName;
+		this.recipeStep.value = this.editedStep.value.stepName;
 		this.isStepEdited = false;
 	}
 }

@@ -49,7 +49,17 @@ export class RecipesService {
 			kcal: recipe.kcal ? recipe.kcal : null,
 			imagePath: recipe.imagePath ? recipe.imagePath : '',
 			userId: recipe.userId
-		});
+		}).catch((error) => console.log(error));
+	}
+
+	editRecipe(recipe: Recipe) {
+		this.recipesCollection.doc(recipe.id).update(recipe)
+			.then(() => {
+				console.log('Recipe successfully updated!');
+			})
+			.catch(error => {
+				console.error('Error removing recipe: ', error);
+			});
 	}
 
 	deleteRecipe(id: string) {

@@ -39,13 +39,15 @@ const appRoutes: Routes = [
 				path: 'list/:id',
 				component: RecipeDetailComponent,
 			},
+			{
+				path: 'new',
+				component: EditRecipeComponent,
+			},
+			{
+				path: 'edit/:id',
+				component: EditRecipeComponent,
+			}
 		]
-	},
-	{
-		path: 'edit-recipe',
-		component: EditRecipeComponent,
-		canActivate: [AngularFireAuthGuard],
-		data: { authGuardPipe: redirectUnauthorizedToLogin }
 	},
 	{
 		path: 'shopping-list',

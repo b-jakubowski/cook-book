@@ -14,6 +14,7 @@ import { Ingredient } from '../ingredient.interface';
 })
 export class RecipeDetailComponent {
 	activatedRouteId: string = this.activatedRoute.snapshot.params.id;
+	editLink = `/recipes/edit/${this.activatedRouteId}`;
 	selectedRecipe$: Observable<Recipe> = this.store.select(state => state.recipes.entities[this.activatedRouteId]).pipe(filter(Boolean));
 	isIngredientsTabSelected = true;
 	isStepsTabSelected = false;
