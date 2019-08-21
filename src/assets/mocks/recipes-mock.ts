@@ -1,4 +1,4 @@
-import { Recipe } from '../../app/recipes/recipe.interface';
+import { Recipe } from 'src/app/recipes/recipe.interface';
 
 export const recipes: Recipe[] = [
 	{

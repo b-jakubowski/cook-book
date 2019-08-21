@@ -4,11 +4,14 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "deploy": "ng build --prod && firebase deploy"
+		"deploy": "ng build --prod && firebase deploy",
+		"build": "ng build && npm run build:ssr",
+		"build:ssr": "ng run cook-book:server && npm run webpack:ssr",
+		"webpack:ssr": "webpack --config webpack.server.config.js",
+		"serve:ssr": "node dist/cook-book-webpack/server.js"
   },
   "private": true,
   "dependencies": {
@@ -20,6 +23,7 @@
     "@angular/forms": "~8.0.1",
     "@angular/platform-browser": "~8.0.1",
     "@angular/platform-browser-dynamic": "~8.0.1",
+    "@angular/platform-server": "~8.0.1",
     "@angular/router": "~8.0.1",
     "@fortawesome/angular-fontawesome": "^0.4.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.19",
@@ -39,10 +43,13 @@
     "@angular/cli": "~8.0.3",
     "@angular/compiler-cli": "~8.0.1",
     "@angular/language-service": "~8.0.1",
+    "@nguniversal/express-engine": "^8.1.1",
+    "@nguniversal/module-map-ngfactory-loader": "^8.1.1",
     "@types/jasmine": "~3.3.8",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",
     "codelyzer": "^5.0.0",
+    "express": "^4.17.1",
     "jasmine-core": "~3.4.0",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~4.1.0",
@@ -51,9 +58,13 @@
     "karma-jasmine": "~2.0.1",
     "karma-jasmine-html-reporter": "^1.4.0",
     "protractor": "~5.4.0",
+    "ts-loader": "^6.0.4",
     "ts-node": "~7.0.0",
     "tslint": "~5.15.0",
     "tslint-config-airbnb": "^5.11.1",
-    "typescript": "~3.4.3"
+    "typescript": "~3.4.3",
+    "webpack-cli": "^3.3.7",
+    "ws": "^7.1.2",
+    "xhr2": "^0.2.0"
   }
 }
