@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import {FormArray, FormBuilder, FormControl, Validators} from '@angular/forms';
-import {RecipesService} from '../recipes.service';
-import {Recipe} from '../recipe.interface';
-import {Router, ActivatedRoute} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { FormArray, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { RecipesService } from '../recipes.service';
+import { Recipe } from '../recipe.interface';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -51,25 +51,25 @@ export class EditRecipeComponent implements OnInit {
 	onSubmit(): void {
 		if (this.recipeForm.valid) {
 			const recipeFormVals: Recipe = {
+				id: this.activatedRouteId,
 				name: this.recipeForm.value.name,
-				category: [],
-				description: [],
-				ingredients: this.recipeForm.value.ingredients,
+				category: this.recipeCategories.value,
+				description: this.recipeSteps.value,
+				ingredients: this.recipeIngredients.value,
 				time: this.recipeForm.value.time,
 				kcal: this.recipeForm.value.kcal ? this.recipeForm.value.kcal : null,
 				imagePath: this.recipeForm.value.imagePath ? this.recipeForm.value.imagePath : '',
 				userId: this.afAuth.auth.currentUser.uid
 			};
 
-			this.recipeForm.value.categories.forEach(category => recipeFormVals.category.push(category.name));
-			this.recipeForm.value.steps.forEach(step => recipeFormVals.description.push(step.name));
-
 			if (!this.isEditMode) {
 				this.recipeService.addRecipe(recipeFormVals);
+			} else {
+				this.recipeService.editRecipe(recipeFormVals);
 			}
 
 			this.openNotification();
-			setTimeout(() => this.router.navigate(['/recipes']), 2000 );
+			setTimeout(() => this.router.navigate(['/recipes']), 1000 );
 		}
 	}
 
@@ -87,7 +87,6 @@ export class EditRecipeComponent implements OnInit {
 
 	fillEditedRecipeForm() {
 		const editedRecipe$: Observable<Recipe> = this.store.select(state => state.recipes.entities[this.activatedRouteId]).pipe(filter(Boolean));
-
 		editedRecipe$.pipe(take(1)).subscribe((recipe: Recipe) => {
 			this.recipeForm.controls.name.setValue(recipe.name);
 			this.recipeForm.controls.kcal.setValue(recipe.kcal);
@@ -102,15 +101,6 @@ export class EditRecipeComponent implements OnInit {
 
 	openNotification() {
 		this.ingrAddedModalVisible = true;
-	}
-
-	createIngredient(nameVal, amountVal) {
-		if (nameVal.length && amountVal.length) {
-			this.recipeIngredients.push(this.formBuilder.control({
-				name: nameVal,
-				amount: amountVal
-			}));
-		}
 	}
 
 	addCategory(value: string): void {
@@ -128,7 +118,6 @@ export class EditRecipeComponent implements OnInit {
 	}
 
 	addIngredient(value: string, amount: string): void {
-		this.ingredients = this.recipeForm.get('ingredients') as FormArray;
 		if (value.length && amount.length) {
 			this.createIngredient(value, amount);
 			this.ingrNameInputVal = '';
@@ -136,16 +125,23 @@ export class EditRecipeComponent implements OnInit {
 		}
 	}
 
+	createIngredient(nameVal, amountVal) {
+		this.recipeIngredients.push(this.formBuilder.control({
+			name: nameVal,
+			amount: amountVal
+		}));
+	}
+
 	deleteCategory(key: number): void {
-		this.categories.removeAt(key);
+		this.recipeCategories.removeAt(key);
 	}
 
 	deleteStep(key: number): void {
-		this.steps.removeAt(key);
+		this.recipeSteps.removeAt(key);
 	}
 
 	deleteIngredient(key: number): void {
-		this.ingredients.removeAt(key);
+		this.recipeIngredients.removeAt(key);
 	}
 
 	onCategoryKey(event: any) {
