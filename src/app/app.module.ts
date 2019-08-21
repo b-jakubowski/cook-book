@@ -50,7 +50,7 @@ import { AngularFireAuthGuardModule } from '@angular/fire/auth-guard';
 		AuthComponent,
 	],
 	imports: [
-		BrowserModule,
+		BrowserModule.withServerTransition({ appId: 'serverApp' }),
 		CoreModule,
 		SharedModule,
 		AppRoutingModule,
