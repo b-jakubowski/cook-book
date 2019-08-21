@@ -6,49 +6,47 @@
 		<span>Back</span>
 	</a>
 
-		<div class="columns">
-			<div class="column recipe-info">
-				<div>
-					<h2 class="title is-3">{{(selectedRecipe$ | async).name}}</h2>
-					<div class="has-text-grey">
-						<p class="is-size-5"><fa-icon  [icon]="'clock'"></fa-icon> {{(selectedRecipe$ | async).time}}</p>
-						<p class="is-size-5"><fa-icon  [icon]="'weight-hanging'"></fa-icon> {{(selectedRecipe$ | async).kcal}} kcal</p>
-						<p class="is-size-5"><fa-icon  [icon]="'carrot'"></fa-icon> {{(selectedRecipe$ | async).ingredients.length}} ingredients</p>
-					</div>
-						<div class="categories-tags">
-							<p class="is-size-5 has-text-grey">Categories: </p>
-							<ng-container *ngFor="let category of (selectedRecipe$ | async).category">
-								<span class="tag is-primary is-medium is-hoverable">{{category}}</span>
-							</ng-container>
-						</div>
+  <div class="columns recipe-info-panel">
+    <div class="column recipe-info">
+      <div>
+        <h2 class="title is-3">{{(selectedRecipe$ | async).name}}</h2>
+        <div class="has-text-grey">
+          <p class="is-size-5"><fa-icon  [icon]="'clock'"></fa-icon> {{(selectedRecipe$ | async).time}}</p>
+          <p class="is-size-5"><fa-icon  [icon]="'weight-hanging'"></fa-icon> {{(selectedRecipe$ | async).kcal}} kcal</p>
+          <p class="is-size-5"><fa-icon  [icon]="'carrot'"></fa-icon> {{(selectedRecipe$ | async).ingredients.length}} ingredients</p>
+        </div>
+          <div class="categories-tags">
+            <p class="is-size-5 has-text-grey">Categories: </p>
+            <ng-container *ngFor="let category of (selectedRecipe$ | async).category">
+              <span class="tag is-primary is-medium is-hoverable">{{category}}</span>
+            </ng-container>
+          </div>
+      </div>
+    </div>
+    <div class="column">
+      <img [src]="(selectedRecipe$ | async).imagePath" alt="recipe image">
+    </div>
+  </div>
 
-				</div>
-				<div class="tags-container">
-					<div class="edit-delete-btns">
-						<a 
-							class="button is-info is-outlined"
-							[routerLink]="editLink">
+</ng-container>
+<div class="tags-container">
+  <div class="edit-delete-btns">
+    <a
+      class="button is-info is-outlined"
+      [routerLink]="editLink">
 							<span class="icon is-small">
 								<fa-icon [icon]="'edit'"></fa-icon>
 							</span>
-							<span>Edit</span>
-						</a>
-						<a class="button is-danger is-outlined" (click)="onDeleteBtnClick()">
-							<span>Delete</span>
-							<span class="icon is-small">
+      <span>Edit</span>
+    </a>
+    <a class="button is-danger is-outlined" (click)="onDeleteBtnClick()">
+      <span>Delete</span>
+      <span class="icon is-small">
 								<fa-icon [icon]="'times'"></fa-icon>
 							</span>
-						</a>
-					</div>
-				</div>
-			</div>
-			<div class="column">
-					<img [src]="(selectedRecipe$ | async).imagePath" alt="recipe image">
-			</div>
-		</div>
-
-</ng-container>
-
+    </a>
+  </div>
+</div>
 <div class="tabs is-centered is-medium">
 	<ul>
 		<li [ngClass]="{'is-active': isIngredientsTabSelected}">
@@ -74,7 +72,7 @@
 		[openNotification]="ingrAddedModalVisible"
 		[error]="error">
 	</app-confirm-notification>
-	
+
 </ng-container>
 <ng-template #recipeSteps>
 	<app-recipe-detail-steps [selectedRecipe$]="selectedRecipe$"></app-recipe-detail-steps>
